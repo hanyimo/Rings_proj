@@ -8,7 +8,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">Home</a>
 							</li>
-							<li class="active">审核帖子</li>
+							<li>商品管理</li>
 						</ul><!-- /.breadcrumb -->
 					</div>
 			<div >
@@ -22,10 +22,10 @@
 							</h1>
 						</div><!-- /.page-header -->
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						<button class="btn btn-success" style="margin-top:50px;margin-left:70px;width:160px;height:60px;">
+						<a href="${pageContext.request.contextPath }/server/goodsManage"><button class="btn btn-success" style="margin-top:50px;margin-left:70px;width:160px;height:60px;">
 							<i class="ace-icon fa fa-list"></i>
 							<span>商品管理</span>
-						</button>
+						</button></a>
 
 						<button class="btn btn-info" style="margin-top:50px;margin-left:80px;width:160px;height:60px;">
 							<i class="ace-icon fa fa-credit-card"></i>

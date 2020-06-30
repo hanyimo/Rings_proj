@@ -32,6 +32,11 @@ public class ClientController {
 	public String clientDesign() {
 		return "user_design";
 	}
+	// 跳转到 designup 页面
+	@RequestMapping("/designup")
+	public String clientDesignUp() {
+		return "user_designup";
+	}
 	// 跳转到 personInfo 页面
 	@RequestMapping("/personInfo")
 	public String clientPersonInfo() {

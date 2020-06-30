@@ -35,7 +35,7 @@
                <h4 class="fleft">设计空间</h4>
                <ul class="breadcrumb fright">
                   <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
-                  <li class="active">设计空间</li>
+                  <li class="active">发布设计</li>
                </ul>
             </div>
          </div>
@@ -43,22 +43,42 @@
       <section id="ourTeam" class="row contentRowPad">
          <div class="container">
          	<div class="row sectionTitle">
-         		<a class="com_btn" href="${pageContext.request.contextPath}/client/designup" style="float:right;margin:0px 0px 0px 20px;">发布设计</a>
+         		<a class="com_btn" href="${pageContext.request.contextPath}/client/design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
          		<a class="com_btn" href="https://www.vam.ac.uk/designaring" style="float:right;">开始设计</a>
          	</div>
             <div class="row sectionTitle" style="border-bottom:3px solid #e1e1e1;border-top:3px solid #e1e1e1">
-               <h3 style="margin:20px 0px;">我的设计</h3>
+               <h3 style="margin:20px 0px;">发布设计</h3>
             </div>
             <div class="row">
-               <div class="col-sm-3">
-                  <div class="thumbnail">
-                     <img src="${pageContext.request.contextPath }/statics/client/images/team/1.png" alt=" ">
-                     <div class="caption">
-                        <h4>设计名</h4>
-                        <h5>设计时间</h5>
-                     </div>
-                  </div>
-               </div>
+            	<section id="contactRow" class="row contentRowPad">
+        			<div class="container">
+            			<div class="row">
+                			<div class="col-sm-6" >
+                    			<div class="row m0 contactForm">
+                        			<form class="row m0" id="contactForm" method="post" name="contact" action="contact_process.php">
+                            			<div class="row m0">
+                                			<label for="name">作品名称 *</label>
+                                			<input type="text" class="form-control" name="name" id="name">
+                            			</div>
+                            			<div class="row m0">
+                                			<label for="dlink">作品链接 *</label>
+                                			<input type="text" class="form-control" name="dlink" id="dlink">
+                            			</div>
+                           			 	<div class="row m0">
+                                			<label for="message">作品信息</label>
+                                			<textarea name="message" id="message" class="form-control"></textarea>
+                            			</div>
+                            			<button class="com_btn" type="submit" style="margin:10px 10px 0px 0px;">上传图片</button>
+                            			<button class="com_btn" type="submit" style="margin:10px 0px 0px 10px;">提交设计</button>                            
+                        			</form>
+                    			</div>
+                			</div>
+               				<div class="col-sm-6" style="margin:20px 0px 0px 55px; padding:0px;border:1px solid black;width:45%;">
+               					<img alt="555" src="${pageContext.request.contextPath }/statics/client/images/blog/blog1.png" width="100%" />
+               				</div>
+            			</div>
+        			</div>
+    			</section>
             </div>
          </div>
       </section>

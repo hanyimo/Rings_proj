@@ -46,7 +46,7 @@
 						<b class="arrow"></b>
 							<ul class="submenu">
 							<li class="">
-								<a href="#" class="dropdown-toggle">
+								<a href="${pageContext.request.contextPath }/server/goodsManage" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
 									商品分类管理
 								</a>
