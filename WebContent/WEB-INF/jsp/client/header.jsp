@@ -50,7 +50,7 @@
                       <li><a href="${pageContext.request.contextPath }/client/design">设计空间</a></li>
                       <li><a href="#">我们的故事</a></li>
                       <li><a href="${pageContext.request.contextPath }/about">关于我们</a></li>
-                     <li><a href="${pageContext.request.contextPath }/contact">联系我们</a></li>
+                     <li><a href="${pageContext.request.contextPath }/client/contact">联系我们</a></li>
                   </ul>
                </div>
                <!-- /.navbar-collapse -->

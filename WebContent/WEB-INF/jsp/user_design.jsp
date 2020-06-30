@@ -50,15 +50,30 @@
                <h3 style="margin:20px 0px;">我的设计</h3>
             </div>
             <div class="row">
-               <div class="col-sm-3">
-                  <div class="thumbnail">
-                     <img src="${pageContext.request.contextPath }/statics/client/images/team/1.png" alt=" ">
-                     <div class="caption">
-                        <h4>设计名</h4>
-                        <h5>设计时间</h5>
+               <c:forEach items="${design }" var="design">
+               <c:if test="${design.designid}%3=0">
+               	<div class="col-sm-3" style="padding:5px 2px;margin:0px 0px 25px 0px;width:30%;">
+               	  <div class="thumbnail">
+                     <img src="${pageContext.request.contextPath }/statics/client/upload/${design.dPhoto}" style="width:100%;height:250px;">
+                     <div class="caption" style="margin:10px 0px 0px 0px;padding:0px;">
+                        <h4>${design.dname}</h4>
+                        <h5>${design.dCreateDate}</h5>
                      </div>
                   </div>
                </div>
+               </c:if>
+               <c:if test="${design.designid}%3!=0">
+               	<div class="col-sm-3" style="padding:5px 2px;margin:0px 5% 25px 0px;width:30%;">
+                  <div class="thumbnail">
+                     <img src="${pageContext.request.contextPath }/statics/client/upload/${design.dPhoto}" style="width:100%;height:250px;">
+                     <div class="caption" style="margin:10px 0px 0px 0px;padding:0px;">
+                        <h4>${design.dname}</h4>
+                        <h5>${design.dCreateDate}</h5>
+                     </div>
+                  </div>
+                </div>
+               </c:if>
+               </c:forEach>
             </div>
          </div>
       </section>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.ContactMapper">
+	<resultMap type="Contact" id="contactMap">
+		<id property="contactId" column="contactId"/>
+		<result property="cMessage" column="cMessage"/>
+		<result property="cDate" column="cDate" javaType="DATE"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+		</association>
+	</resultMap>
+	<!-- 联系我们 -->
+		<!-- 根据id获取用户信息 -->
+		<select id="findUserById" resultMap="contactMap">
+			select * from ring_contact left join ring_user 
+				on ring_contact.uid=ring_user.uid
+			    where contactId=#{contactId}
+		</select>
+		<!-- 添加内容到数据库 -->
+		<insert id="addNewContact" parameterType="Contact">
+			insert into ring_contact(cMessage,cDate) values (#{cMessage},#{cDate}) 
+		</insert>
+</mapper>
