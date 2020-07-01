@@ -18,9 +18,7 @@ public class IndexController {
 	// 跳转到 index 页面
 	@RequestMapping("/")
 	public String clientIndex(Model model) {
-		// 获取所有的商品分类显示在列表中
-		List<Category> categories = serverService.findAllCategories();
-		model.addAttribute("categories", categories);
+		
 		return "user_index";
 	}
 	// 跳转到 对应分类页面

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -23,8 +25,35 @@
       <!--Mechanic Styles-->
       <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/client/css/style.css">
       <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/client/css/responsive.css">
+  	  <style>
+  	  	#labelphoto{
+   	  		color:#555555;
+   	  	}
+   	  	#labelphoto:hover span{
+   	  		color:white;
+   	  	}
+   	  </style>
    </head>
    <body>
+   <script>
+   	<%
+   		String error = (String)request.getSession().getAttribute("error");//获取后台参数给error变量
+   	%>
+   	var error = '<%=error%>';//输出error给js变量error
+  	//页面加载完后执行
+   	window.onload=function(){
+		var a = "上传失败";
+		var b = "只能上传图片";
+		var c = "上传成功";
+		if(error==a){
+			alert(error);
+		}else if(error==b){
+			alert(error);
+		}else if(error==c){
+			alert(error);
+		}error=null;
+	}
+   </script>
 	<!-- 头部 -->
       <%@ include file="client/header.jsp" %>
       <!-- 设计空间   -->
@@ -44,7 +73,7 @@
          <div class="container">
          	<div class="row sectionTitle">
          		<a class="com_btn" href="${pageContext.request.contextPath}/client/design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
-         		<a class="com_btn" href="https://www.vam.ac.uk/designaring" style="float:right;">开始设计</a>
+         		<a class="com_btn" href="https://www.vam.ac.uk/designaring" target="_blank" style="float:right;">开始设计</a>
          	</div>
             <div class="row sectionTitle" style="border-bottom:3px solid #e1e1e1;border-top:3px solid #e1e1e1">
                <h3 style="margin:20px 0px;">发布设计</h3>
@@ -55,26 +84,29 @@
             			<div class="row">
                 			<div class="col-sm-6" >
                     			<div class="row m0 contactForm">
-                        			<form class="row m0" id="contactForm" method="post" name="contact" action="contact_process.php">
+                        			<form class="row m0" id="contactForm" method="post" name="contact" action="${pageContext.request.contextPath}/client/add_design" enctype="multipart/form-data">
                             			<div class="row m0">
-                                			<label for="name">作品名称 *</label>
-                                			<input type="text" class="form-control" name="name" id="name">
+                                			<label for="dname">作品名称 *</label>
+                                			<input type="text" class="form-control" name="dname" id="dname">
                             			</div>
                             			<div class="row m0">
                                 			<label for="dlink">作品链接 *</label>
                                 			<input type="text" class="form-control" name="dlink" id="dlink">
                             			</div>
                            			 	<div class="row m0">
-                                			<label for="message">作品信息</label>
-                                			<textarea name="message" id="message" class="form-control"></textarea>
+                                			<label for="dMessage">作品信息</label>
+                                			<textarea name="dMessage" id="dMessage" class="form-control"></textarea>
                             			</div>
-                            			<button class="com_btn" type="submit" style="margin:10px 10px 0px 0px;">上传图片</button>
+                            			<label class="com_btn" id="labelphoto">
+                            				<input type="file" name="bphoto" onchange="viewImage(this)" style="left:-9999px;position:absolute;">
+                            				<span style="font-size:15px;">上传图片</span>
+                            			</label>
                             			<button class="com_btn" type="submit" style="margin:10px 0px 0px 10px;">提交设计</button>                            
                         			</form>
                     			</div>
                 			</div>
-               				<div class="col-sm-6" style="margin:20px 0px 0px 55px; padding:0px;border:1px solid black;width:45%;">
-               					<img alt="555" src="${pageContext.request.contextPath }/statics/client/images/blog/blog1.png" width="100%" />
+               				<div class="col-sm-6" style="align:center;margin:20px 0px 0px 55px; padding:0px;width:45%;height:380px">
+               					<img src="${pageContext.request.contextPath }/statics/client/upload/aaa.jpg"  id="preview" style="width:525px;height:380px;"/>
                				</div>
             			</div>
         			</div>
@@ -84,6 +116,8 @@
       </section>
       <!-- 尾部 -->
       <%@ include file="client/footer.jsp" %>
+      <script type="text/javascript" src="${pageContext.request.contextPath }/statics/client/js/common.js"></script>
+   	  
    </body>
 </html>
 
