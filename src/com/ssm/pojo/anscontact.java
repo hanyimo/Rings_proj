@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class anscontact {
 	private Integer ansContactId;
-	private Integer uid;
+	private User user;
 	private String ansMessage;
 	private Date ansDate;
 	private String status;
@@ -12,10 +12,10 @@ public class anscontact {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public anscontact(Integer ansContactId, Integer uid, String ansMessage, Date ansDate, String status) {
+	public anscontact(Integer ansContactId, User user, String ansMessage, Date ansDate, String status) {
 		super();
 		this.ansContactId = ansContactId;
-		this.uid = uid;
+		this.user = user;
 		this.ansMessage = ansMessage;
 		this.ansDate = ansDate;
 		this.status = status;
@@ -26,11 +26,11 @@ public class anscontact {
 	public void setAnsContactId(Integer ansContactId) {
 		this.ansContactId = ansContactId;
 	}
-	public Integer getUid() {
-		return uid;
+	public User getUser() {
+		return user;
 	}
-	public void setUid(Integer uid) {
-		this.uid = uid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getAnsMessage() {
 		return ansMessage;

@@ -45,5 +45,12 @@
 							<i class="ace-icon fa  fa-pencil-square-ol"></i>
 							<span>订单管理</span>
 						</button>
+						
+						
+						<button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
+							<i class="ace-icon fa  fa-envelope"></i>
+							<a href="${pageContext.request.contextPath }/client/obtainContact"><span>回复用户</span></a>
+						</button>
+						
 					</div>
 		</div>

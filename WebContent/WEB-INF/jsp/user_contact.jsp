@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +65,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="name">用 户 名 *</label>
-                                    <input type="text" class="form-control" name="name" id="name">
+                                    <input type="text" class="form-control" name="name" value="${user.userName }" id="name" readonly="readonly">
                                 </div>
                                <!--  <div class="col-sm-6">
                                     <label for="email">Email *</label>
@@ -196,7 +195,7 @@
 	// 忽略粘贴内容中的图片
 	editor.customConfig.pasteIgnoreImg = true;
 	// 上传图片到服务器
-	editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/upload';
+	editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/statics/upload';
 	// 隐藏“网络图片”tab
 	editor.customConfig.showLinkImg = false;
 	// 将图片大小限制为 1M

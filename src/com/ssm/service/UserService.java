@@ -1,10 +1,18 @@
 package com.ssm.service;
 
+import java.util.List;
+
 import com.ssm.pojo.Contact;
+import com.ssm.pojo.User;
+import com.ssm.pojo.anscontact;
 
 public interface UserService {
 	//获取用户名
-	Contact findUserById(int contactId);
+	User findUserById(Integer uid);
 	//添加联系我们内容
 	int addNewContact(Contact contact);
+	
+	List<Contact> findContact(Integer status);
+	
+	int addNewAnsContact(anscontact ans);
 }

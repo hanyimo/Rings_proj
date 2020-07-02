@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ssm.pojo.Category;
+import com.ssm.pojo.Contact;
 import com.ssm.service.Serverservice;
+import com.ssm.service.UserService;
 
 
 @Controller
@@ -79,4 +81,5 @@ public class ServerController {
 			model.addAttribute("error", "修改分类名称成功");
 			return "EditgoodsCategory";
 		}
+		
 }
