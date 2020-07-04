@@ -4,21 +4,27 @@ import java.util.Date;
 
 public class anscontact {
 	private Integer ansContactId;
-	private User user;
 	private String ansMessage;
 	private Date ansDate;
 	private String status;
+	private User user;
+	private Integer uid;
+	private Contact contact;
+	private Integer contactId;
 	public anscontact() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public anscontact(Integer ansContactId, User user, String ansMessage, Date ansDate, String status) {
+	public anscontact(Integer ansContactId, Integer uid, String ansMessage, Date ansDate, String status,Integer contactId,
+					   User user,Contact contact) {
 		super();
 		this.ansContactId = ansContactId;
-		this.user = user;
+		this.uid = uid;
 		this.ansMessage = ansMessage;
 		this.ansDate = ansDate;
 		this.status = status;
+		this.contactId = contactId;
+		this.user = user;
+		this.contact = contact;
 	}
 	public Integer getAnsContactId() {
 		return ansContactId;
@@ -26,11 +32,11 @@ public class anscontact {
 	public void setAnsContactId(Integer ansContactId) {
 		this.ansContactId = ansContactId;
 	}
-	public User getUser() {
-		return user;
+	public Integer getUid() {
+		return uid;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 	public String getAnsMessage() {
 		return ansMessage;
@@ -49,6 +55,24 @@ public class anscontact {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Integer getContactId() {
+		return contactId;
+	}
+	public void setContactId(Integer contactId) {
+		this.contactId = contactId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Contact getContact() {
+		return contact;
+	}
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 	
 }

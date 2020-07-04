@@ -5,6 +5,7 @@ import java.util.List;
 import com.ssm.pojo.Contact;
 import com.ssm.pojo.User;
 import com.ssm.pojo.anscontact;
+import com.ssm.pojo.feedback;
 
 public interface ContactMapper {
 	
@@ -16,4 +17,12 @@ public interface ContactMapper {
 	List<Contact> findContact(Integer status);
 	
 	int addNewAnsContact(anscontact ans);
+	
+	int updateContactById(Integer contactId);
+	
+	List<anscontact> findAllAnsContact();
+	
+	int addNewFeedback(feedback feed);
+	
+	List<feedback> findAllFeedback();
 }

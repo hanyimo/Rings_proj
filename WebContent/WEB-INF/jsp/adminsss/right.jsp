@@ -34,7 +34,7 @@
 
 						<button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
 							<i class="ace-icon fa  fa-envelope"></i>
-							<span>用户反馈</span>
+							<a href="${pageContext.request.contextPath }/client/backstage"><span>用户反馈</span></a>
 						</button>
 
 						<button class="btn btn-danger" style="margin-top:50px;margin-left:100px;width:160px;height:60px;">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +28,72 @@
       <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/client/css/responsive.css">
       <script src="${pageContext.request.contextPath}/statics/client/js/jquery.min.js"></script>
       <script src="${pageContext.request.contextPath}/statics/client/js/wangEditor.min.js"></script>
-      <style type="text/css">
-      	.col-sm-7{
-      		margin-top:-600px;
-      		margin-left:680px;
-      	}
-      	.w-e-text-container{
-      		width:400px;
-      	}
+<style type="text/css">
+   .col-sm-7{
+      	margin-top:-600px;
+      	margin-left:680px;
+     }
+    .w-e-text-container{
+      	width:400px;
+      }
+     #mapBox{
+      	width:1000px;
+      	height:500px;
+      	margin-left:70px;
+      }
+     
+	.top{
+		text-align: center;
+    	font-size: 18px;
+    	text-transform: uppercase;
+    	color: black;
+    	padding: 30px 0;
+		
+	}
+/* Table Styles */
+
+.table-wrapper{
+    margin: 10px 0px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+      	
       </style>
    </head>
 <body>
@@ -47,7 +107,7 @@
                 <h4 class="fleft">联系我们</h4>
                 <ul class="breadcrumb fright">
                     <li><a href="${pageContext.request.contextPath }/">首页</a></li>
-                    <li class="active">联系我们</li>
+                    <li class="active">联系我们 </li>
                 </ul>
             </div>
         </div>
@@ -67,27 +127,8 @@
                                     <label for="name">用 户 名 *</label>
                                     <input type="text" class="form-control" name="name" value="${user.userName }" id="name" readonly="readonly">
                                 </div>
-                               <!--  <div class="col-sm-6">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" name="email" id="email">
-                                </div> -->
-                            </div>
-                           <!--  <div class="row m0">
-                                <label for="subject">subject *</label>
-                                <input type="text" class="form-control" name="subject" id="subject">
-                            </div> -->
-                            <div style="height:30px;"></div>
-                           <!--  <div class="row m0">
-                                <label for="message">内 容 *</label>
-                                <textarea name="cmessage" id="message" class="form-control"></textarea>
-                            </div>
-                            <div class="row m0 captchaRow">
-                                <img src="images/captcha.png" alt=""><br>
-                                <label for="captcha">Enter the above text</label>
-                                <input type="text" class="form-control" name="captcha" id="captcha">
                             </div>
                             <div style="height:30px;"></div>
-                            <button class="btn btn-primary btn-lg filled" type="submit">提交</button>          -->
                             
                             <div class="formRow">
  								<label>内容<span class="req">*</span></label>
@@ -100,15 +141,6 @@
 							</div>
                         </form>
                        </div>
-                       <!--  <div id="success">
-                                <span class="green textcenter">
-                                   您的消息发送成功！我会尽快与你联系。
-                                </span>
-                        </div>
-                        <div id="error">
-                            <span>
-                                出现问题，请尝试刷新并再次提交表单。
-                            </span> -->
                         </div>
                     </div>
                 </div>
@@ -160,7 +192,40 @@
         </div>
     </section>
       <section id="googleMapRow" class="row">
-        <div class="row m0" id="mapBox"></div>
+      		
+        <div class="row m0" id="mapBox">
+        	<div class="top">
+        		<h2>官方回复</h2>
+        	</div>
+			<div class="table-wrapper">
+    			<table class="fl-table">
+      				  <thead>
+      				  	   <tr>
+      				  	   		<th>编号</th>
+            					<th>用户名</th>
+            					<th>联系官方</th>
+            					<th>官方回复</th>
+            					<th>回复日期</th>
+        				   </tr>
+        			  </thead>
+      					  <tbody>
+        					<c:forEach items="${ans }" var="anss">
+        						<tr>
+            						<td>${anss.ansContactId }</td>
+            						<td>${anss.user.userName}</td>
+            						<td>${anss.contact.cMessage }</td>
+            						<td>${anss.ansMessage }</td>
+            						<td>
+            							<span>
+											<fmt:formatDate value="${anss.ansDate }" pattern="yyyy-MM-dd"/>
+										</span>
+            						</td>
+       							</tr>
+        					</c:forEach>
+       				  	  </tbody>
+    			</table>
+			</div>
+        </div>
     </section>
       <!-- 引入尾部 -->
    <%@ include file="client/footer.jsp" %>
@@ -195,7 +260,7 @@
 	// 忽略粘贴内容中的图片
 	editor.customConfig.pasteIgnoreImg = true;
 	// 上传图片到服务器
-	editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/statics/upload';
+	editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/client/conupload';
 	// 隐藏“网络图片”tab
 	editor.customConfig.showLinkImg = false;
 	// 将图片大小限制为 1M
@@ -206,7 +271,7 @@
 	editor.customConfig.uploadImgHooks = {
 		customInsert: function (insertImg, result, editor) {
     		for(var i in result){
-    			insertImg('${pageContext.request.contextPath}/statics/file/'+result[i]);
+    			insertImg('${pageContext.request.contextPath}/statics/client/contactFile/'+result[i]);
     		}
 		}
 	}

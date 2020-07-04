@@ -13,6 +13,7 @@ import com.ssm.dao.ContactMapper;
 import com.ssm.pojo.Contact;
 import com.ssm.pojo.User;
 import com.ssm.pojo.anscontact;
+import com.ssm.pojo.feedback;
 import com.ssm.service.UserService;
 
 @Service("userService")
@@ -32,14 +33,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public int addNewContact(Contact contact) {
-		//对内容进行编码处理
-		String message = null;
-		try {
-			message = URLEncoder.encode(contact.getcMessage(), "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		contact.setcMessage(message);
 		return contactMapper.addNewContact(contact);
 	}
 	/**
@@ -47,34 +40,39 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public List<Contact> findContact(Integer status) {
-		List<Contact> contact = contactMapper.findContact(status);
-		String message = null;
-		for(Contact con : contact) {
-			try {
-				// 对内容进行解码处理(采用UTF-8编码格式)
-				message = URLDecoder.decode(con.getcMessage(),"utf-8");
-				// 屏蔽掉敏感内容
-				message = message.replaceAll("(操)","*");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			con.setcMessage(message);
-		}
-		return contact;
+		return contactMapper.findContact(status);
 	}
 	/**
 	 * 回复用户
 	 */
 	@Override
 	public int addNewAnsContact(anscontact ans) {
-		String message = null;
-		try {
-			message = URLEncoder.encode(ans.getAnsMessage(), "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		ans.setAnsMessage(message);
 		return contactMapper.addNewAnsContact(ans);
+	}
+	/**
+	 * 修改回复状态
+	 */
+	@Override
+	public int updateContactById(Integer contactId) {
+		return contactMapper.updateContactById(contactId);
+	}
+	/**
+	 * 获取官方回复
+	 */
+	@Override
+	public List<anscontact> findAllAnsContact() {
+		return contactMapper.findAllAnsContact();
+	}
+	/**
+	 * 用户反馈
+	 */
+	@Override
+	public int addNewFeedback(feedback feed) {
+		return contactMapper.addNewFeedback(feed);
+	}
+	@Override
+	public List<feedback> findAllFeedback() {
+		return contactMapper.findAllFeedback();
 	}
 	
 }

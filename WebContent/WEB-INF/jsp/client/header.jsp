@@ -24,7 +24,8 @@
                <div class="collapse navbar-collapse" id="mainNav">
                   <ul class="nav navbar-nav">
                      <li class="dropdown">
-                        <a href="${pageContext.request.contextPath}/index"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">首页</a>
+                     	<!-- <a href="${pageContext.request.contextPath }/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">首页</a> -->
+                        <a href="${pageContext.request.contextPath }/">首页</a>
                      </li>
                     
                      <li class="dropdown">
@@ -51,6 +52,7 @@
                       <li><a href="#">我们的故事</a></li>
                       <li><a href="${pageContext.request.contextPath }/about">关于我们</a></li>
                      <li><a href="${pageContext.request.contextPath }/client/contact">联系我们</a></li>
+                     <li><a href="${pageContext.request.contextPath }/client/feedback">用户反馈</a></li>
                   </ul>
                </div>
                <!-- /.navbar-collapse -->

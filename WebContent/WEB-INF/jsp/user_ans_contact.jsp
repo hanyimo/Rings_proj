@@ -81,7 +81,7 @@
 					<div class="widget-body">
 						<div class="widget-main no-padding">
 							<form class="row m0" id="contactForm" method="post" name="ans" 
-									action="${pageContext.request.contextPath}/client/ansContact">
+									action="${pageContext.request.contextPath}/client/ansContact/${uid}/${contactId }">
 								 <div class="marginLeft">
 								 	<div class="formRow">
 								 		<label></label>
@@ -95,7 +95,9 @@
 								<div class="form-actions center">
 									<div class="butm">
 										<input type="submit" class="btn btn-sm btn-success" value="提交" >
-										<input type="button" class="btn btn-sm btn-success" id="back" name="back" value="返回" >
+										<a href="${pageContext.request.contextPath}/client/obtainContact">
+											<input type="button" class="btn btn-sm btn-success" value="返回" >
+										</a>
 									</div>
 								</div>
 							</form>
@@ -173,7 +175,7 @@
 		// 忽略粘贴内容中的图片
 		editor.customConfig.pasteIgnoreImg = true;
 		// 上传图片到服务器
-		editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/statics/upload';
+		editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/client/conupload';
 		// 隐藏“网络图片”tab
 		editor.customConfig.showLinkImg = false;
 		// 将图片大小限制为 1M
@@ -184,7 +186,7 @@
 		editor.customConfig.uploadImgHooks = {
 			customInsert: function (insertImg, result, editor) {
 	    		for(var i in result){
-	    			insertImg('${pageContext.request.contextPath}/statics/file/'+result[i]);
+	    			insertImg('${pageContext.request.contextPath}/statics/client/contactFile/'+result[i]);
 	    		}
 			}
 		}
@@ -413,12 +415,6 @@
 					else $(this).removeClass('dropup');
 				});
 
-			});
-$(function(){	
-				$("#back").click(function(){
-					// 使用了 JavaScirpt 页面跳转方式
-					location.href="${pageContext.request.contextPath}/server/obtainContact";
-				});
 			});
 </script>
 </body>

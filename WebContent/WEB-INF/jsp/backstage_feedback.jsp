@@ -120,25 +120,23 @@ a:hover{
         		<tr>
             		<th>编号</th>
             		<th>用户名</th>
-            		<th>联系内容</th>
-            		<th>联系时间</th>
-           	 		<th>是否回复</th>
+            		<th>反馈主题</th>
+            		<th>用户反馈</th>
+            		<th>反馈时间</th>
         		</tr>
         	</thead>
         		<tbody>
-        			<c:forEach items="${contact}" var="con">
+        			<c:forEach items="${feed}" var="feeds">
         				<tr>
-            				<td>${con.contactId }</td>
-            				<td>${con.user.userName }</td>
-            				<td>${con.cMessage }</td>
+            				<td>${feeds.fid }</td>
+            				<td>${feeds.user.userName }</td>
+            				<td>${feeds.subject }</td>
+            				<td>${feeds.fMessage }</td>
             				<td>
             					<span>
-									<fmt:formatDate value="${con.cDate }" pattern="yyyy-MM-dd"/>
+									<fmt:formatDate value="${feeds.fDate }" pattern="yyyy-MM-dd"/>
 								</span>
             				</td>
-            				<!-- 触发按钮 -->
-           	 				<td id="triggerBtn"><a href="${pageContext.request.contextPath }/client/ansContact/${con.user.uid}/${con.contactId}">回 复</a></td>
-        				
         				
     					</tr>
         			</c:forEach>

@@ -10,6 +10,25 @@
 		<association property="user" javaType="User">
 			<id property="uid" column="uid"/>
 		</association>
+	</resultMap>
+	<resultMap type="anscontact" id="ansContactMap">
+		<id property="ansContactId" column="ansContactId"/>
+		<result property="ansMessage" column="ansMessage"/>
+		<result property="ansDate" column="ansDate" javaType="DATE"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+			<result property="userName" column="userName"/>
+		</association>
+		<association property="contact" javaType="Contact">
+			<id property="contactId" column="contactId"/>
+			<result property="cMessage" column="cMessage"/>
+		</association>
+	</resultMap>
+	<resultMap type="feedback" id="feedbackMap">
+		<id property="fid" column="fid"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+		</association>
 	</resultMap> 
 	<!-- 联系我们 -->
 		<!-- 根据id获取用户信息 -->
@@ -28,6 +47,43 @@
 		</select>
 	<!-- 回复用户 -->
 		<insert id="addNewAnsContact" parameterType="ansContact">
-			insert into ring_anscontact(ansMessage,ansDate) values(#{ansMessage},#{ansDate})
+			insert into ring_anscontact(uid,ansMessage,ansDate,contactId) values(#{uid},#{ansMessage},#{ansDate},#{contactId})
 		</insert>
+	<!-- 修改回复状态 -->
+		<update id="updateContactById" parameterType="int">
+			update ring_contact set status=1 where contactId=#{contactId}
+		</update>
+	<!-- 获取官方回复 -->
+		<select id="findAllAnsContact" resultMap="ansContactMap">
+			select ansContactId,ring_anscontact.uid,ansMessage,ansDate,ring_anscontact.contactId,userName,cMessage
+				from ring_anscontact 
+				left join ring_user on ring_anscontact.uid=ring_user.uid
+				left join ring_contact on ring_anscontact.contactId=ring_contact.contactId
+		</select>
+	<!-- 用户反馈功能 -->
+		<insert id="addNewFeedback" parameterType="feedback">
+			insert into ring_feedback(fMessage,fDate,subject) values(#{fMessage},#{fDate},#{subject})
+		</insert>
+	<!-- 动态获取用户反馈 -->
+		<select id="findAllFeedback" resultMap="feedbackMap">
+			select fid,ring_feedback.uid,subject,fMessage,fDate,userName from ring_feedback 
+				left join ring_user on ring_feedback.uid=ring_user.uid
+		</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 </mapper>
