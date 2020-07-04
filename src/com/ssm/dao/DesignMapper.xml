@@ -12,6 +12,48 @@
 		insert into ring_design(uid,dPhoto,dlink,dCreateDate,dname,dMessage) 
 		values(#{uid},#{dPhoto},#{dlink},#{dCreateDate},#{dname},#{dMessage})
 	</insert>
+	<resultMap type="Invitation" id="invitationMap">
+		<id property="invid" column="invid"/>
+		<association property="uid" javaType="User">
+			<id property="uid" column="uid"/>
+			<result property="userAlice" column="userAlice"/>
+			<result property="userPhoto" column="userPhoto"/>
+		</association>
+	</resultMap>
+	<!-- 添加帖子到数据库中 -->
+	<insert id="addNewInvitation" parameterType="Invitation">
+		insert into ring_invitation(uid,invTitle,invMessage,invCreatDate,status) 
+		values(#{uid.uid},#{invTitle},#{invMessage},#{invCreatDate},0)
+	</insert>
+	<!-- 查找所有的invitation -->
+	<select id="findAllInvitation" resultMap="invitationMap">
+		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid
+	</select>
+	<!-- 根据invid查找invitation -->
+	<select id="findInvitationById" resultMap="invitationMap">
+		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid where invid=#{invid}
+	</select>
+	<!-- 根据invid删除自己的invitation信息 -->
+	<delete id="delInvitationById" parameterType="int">
+		delete from ring_invitation where invid=#{invid}
+	</delete>
+	<!-- 添加回复invitationans信息 -->
+	<insert id="addNewInvitationAns" parameterType="InvitationAns">
+		insert into ring_invitation_ans(uid,invid,ansMessage,ansDate) 
+		values(#{uid},#{invid},#{ansMessage},#{ansDate})
+	</insert>
+	<resultMap type="InvitationAns" id="invitationAnsMap">
+		<id property="aid" column="aid"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+			<result property="userAlice" column="userAlice"/>
+			<result property="userPhoto" column="userPhoto"/>
+		</association>
+	</resultMap>
+	<!-- 查找invid对应的所有的invitationans -->
+	<select id="findAllInvitationAns" resultMap="invitationAnsMap">
+		select * from ring_invitation_ans left join ring_user on ring_invitation_ans.uid=ring_user.uid where ring_invitation_ans.invid=#{invid}
+	</select>
 </mapper>
 
 

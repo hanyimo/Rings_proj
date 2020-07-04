@@ -40,17 +40,17 @@
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">个人设置</a>
                         <ul class="dropdown-menu" role="menu">
-                           <li><a href="${pageContext.request.contextPath }/personInfo">个人信息</a></li>
+                           <li><a href="${pageContext.request.contextPath }/client/personInfo">个人信息</a></li>
                            <li><a href="#">我的收藏</a></li>
                             <li><a href="#">我的订单</a></li>
-                           <li><a href="${pageContext.request.contextPath }/cart">购物车</a></li>
-                           <li><a href="${pageContext.request.contextPath }/checkout">结算</a></li>
+                           <li><a href="${pageContext.request.contextPath }/client/cart">购物车</a></li>
+                           <li><a href="${pageContext.request.contextPath }/client/checkout">结算</a></li>
                         </ul>
                      </li>
                       <li><a href="${pageContext.request.contextPath }/client/design">设计空间</a></li>
-                      <li><a href="#">我们的故事</a></li>
-                      <li><a href="${pageContext.request.contextPath }/about">关于我们</a></li>
-                     <li><a href="${pageContext.request.contextPath }/contact">联系我们</a></li>
+                      <li><a href="${pageContext.request.contextPath }/client/invitation">故事空间</a></li>
+                      <li><a href="${pageContext.request.contextPath }/client/about">关于我们</a></li>
+                     <li><a href="${pageContext.request.contextPath }/client/contact">联系我们</a></li>
                   </ul>
                </div>
                <!-- /.navbar-collapse -->

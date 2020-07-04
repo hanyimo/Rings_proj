@@ -63,7 +63,7 @@
             <div class="container">
                <h4 class="fleft">设计空间</h4>
                <ul class="breadcrumb fright">
-                  <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+                  <li><a href="${pageContext.request.contextPath }/">首页</a></li>
                   <li class="active">发布设计</li>
                </ul>
             </div>

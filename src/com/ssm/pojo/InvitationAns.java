@@ -8,6 +8,22 @@ public class InvitationAns {
 	private Integer invid;
 	private String ansMessage;
 	private Date ansDate;
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public void setAid(Integer aid) {
+		this.aid = aid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+	public void setInvid(Integer invid) {
+		this.invid = invid;
+	}
 	public InvitationAns() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -62,7 +62,7 @@
                         <h5><fmt:formatDate value="${design.dCreateDate}" pattern="yyyy-MM-dd"/></h5>
                      </div>
                   </div>
-                </div>
+                 </div>
                </c:if>
                <c:if test="${design.designid%3!=0 }">
                	<div class="col-sm-3" style="padding:5px 2px;margin:0px 5% 25px 0px;width:30%;">
@@ -71,9 +71,9 @@
                      <div class="caption" style="margin:10px 0px 0px 0px;padding:0px;">
                         <a href="${design.dlink }" target="_blank"><h4>${design.dname}</h4></a>
                         <h5><fmt:formatDate value="${design.dCreateDate}" pattern="yyyy-MM-dd"/></h5>
-                     </div>
-                  </div>
-                </div>
+               		 </div>
+               	   </div>
+               	</div>
                </c:if>
                </c:forEach>
             </div>

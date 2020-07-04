@@ -2,21 +2,21 @@ package com.ssm.pojo;
 
 import java.util.Date;
 
-public class contact {
+public class Contact {
 	private Integer contactId;
 	private Integer uid;
 	private String cMessage;
-	private Date dDate;
-	public contact() {
+	private Date cDate;
+	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public contact(Integer contactId, Integer uid, String cMessage, Date dDate) {
+	public Contact(Integer contactId, Integer uid, String cMessage, Date dDate) {
 		super();
 		this.contactId = contactId;
 		this.uid = uid;
 		this.cMessage = cMessage;
-		this.dDate = dDate;
+		this.cDate = cDate;
 	}
 	public Integer getContactId() {
 		return contactId;
@@ -36,11 +36,11 @@ public class contact {
 	public void setcMessage(String cMessage) {
 		this.cMessage = cMessage;
 	}
-	public Date getdDate() {
-		return dDate;
+	public Date getcDate() {
+		return cDate;
 	}
-	public void setdDate(Date dDate) {
-		this.dDate = dDate;
+	public void setcDate(Date cDate) {
+		this.cDate = cDate;
 	}
 	
 }

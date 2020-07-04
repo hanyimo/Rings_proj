@@ -4,34 +4,21 @@ import java.util.Date;
 
 public class Invitation {
 	private Integer invid;
-	private Integer uid;
+	private User uid;
 	private String invTitle;
 	private String invMessage;
 	private Date invCreatDate;
 	private String status;
-	public Invitation() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Invitation(int invid, int uid, String invTitle, String invMessage, Date invCreatDate, String status) {
-		super();
-		this.invid = invid;
-		this.uid = uid;
-		this.invTitle = invTitle;
-		this.invMessage = invMessage;
-		this.invCreatDate = invCreatDate;
-		this.status = status;
-	}
-	public int getInvid() {
+	public Integer getInvid() {
 		return invid;
 	}
-	public void setInvid(int invid) {
+	public void setInvid(Integer invid) {
 		this.invid = invid;
 	}
-	public int getUid() {
+	public User getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(User uid) {
 		this.uid = uid;
 	}
 	public String getInvTitle() {
@@ -58,5 +45,6 @@ public class Invitation {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	
 }
