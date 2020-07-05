@@ -47,8 +47,8 @@
                            <li><a href="${pageContext.request.contextPath }/client/checkout">结算</a></li>
                         </ul>
                      </li>
-                      <li><a href="${pageContext.request.contextPath }/client/design">设计空间</a></li>
-                      <li><a href="${pageContext.request.contextPath }/client/invitation">故事空间</a></li>
+                      <li><a href="${pageContext.request.contextPath }/design/design">设计空间</a></li>
+                      <li><a href="${pageContext.request.contextPath }/design/invitation">故事空间</a></li>
                       <li><a href="${pageContext.request.contextPath }/client/about">关于我们</a></li>
                      <li><a href="${pageContext.request.contextPath }/client/contact">联系我们</a></li>
                   </ul>

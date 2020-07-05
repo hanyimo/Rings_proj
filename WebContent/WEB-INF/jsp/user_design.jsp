@@ -36,7 +36,7 @@
             <div class="container">
                <h4 class="fleft">设计空间</h4>
                <ul class="breadcrumb fright">
-                  <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+                  <li><a href="${pageContext.request.contextPath }/">首页</a></li>
                   <li class="active">设计空间</li>
                </ul>
             </div>
@@ -45,7 +45,7 @@
       <section id="ourTeam" class="row contentRowPad">
          <div class="container">
          	<div class="row sectionTitle">
-         		<a class="com_btn" href="${pageContext.request.contextPath}/client/designup" style="float:right;margin:0px 0px 0px 20px;">发布设计</a>
+         		<a class="com_btn" href="${pageContext.request.contextPath}/design/designup" style="float:right;margin:0px 0px 0px 20px;">发布设计</a>
          		<a class="com_btn" href="https://www.vam.ac.uk/designaring" target="_blank" style="float:right;">开始设计</a>
          	</div>
             <div class="row sectionTitle" style="border-bottom:3px solid #e1e1e1;border-top:3px solid #e1e1e1">

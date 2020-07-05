@@ -29,7 +29,19 @@
       <script src="${pageContext.request.contextPath}/statics/client/js/wangEditor.min.js"></script>
    </head>
    <body>
-   
+   <script>
+   	var error = '<%=(String)request.getAttribute("error") %>';//输出error给js变量error
+  	//页面加载完后执行
+   	window.onload=function(){
+		var a = "内容都不能为空";
+		var b = "发帖成功";
+		if(error==a){
+			alert(error);
+		}else if(error==b){
+			alert(error);
+		}error=null;
+	}
+   </script>
 	<!-- 头部 -->
       <%@ include file="client/header.jsp" %>
       <!-- 故事空间  -->
@@ -40,7 +52,7 @@
                <h4 class="fleft">故事空间</h4>
                <ul class="breadcrumb fright">
                   <li><a href="${pageContext.request.contextPath }/">首页</a></li>
-                  <li class="active"><a href="${pageContext.request.contextPath }/client/invitation">故事空间</a></li>
+                  <li class="active"><a href="${pageContext.request.contextPath }/design/invitation">故事空间</a></li>
                   <li class="active">故事详情</li>
                </ul>
             </div>
@@ -57,9 +69,13 @@
                                 <img src="${pageContext.request.contextPath }/statics/client/invitationupload/${invitation.uid.userPhoto}"  width="60px" height="60px"/>
                             </a>
                         </div>
-                        <div class="media-body">
-                            <h4>${invitation.uid.userAlice}</h4>
-                            <h5><fmt:formatDate value="${invitation.invCreatDate}" pattern="yyyy-MM-dd"/></h5>
+                        <div class="media-body" style="width:800px;">
+                        	<div style="float:left;width:400px;">
+                            	<h4>${invitation.uid.userAlice}</h4>
+                            	<h5><fmt:formatDate value="${invitation.invCreatDate}" pattern="yyyy-MM-dd"/></h5>
+                            </div>
+<!-- ***********************************权限判断（帖主）*********************************** -->
+                            <a class="com_btn" href="" target="_blank" style="margin-top:15px;float:right;width:80px;text-align:center;">删除</a>
                         </div>
                         <div class="row m0 featureImg">
                             <h2 style="text-align:center;">${invitation.invTitle}</h2>
@@ -81,7 +97,8 @@
                             </div>
                             <div class="media-body">
                                 <h5 class="heading">${ans.user.userAlice }</h5>
-                                <h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/></h6>
+<!-- ***********************************权限判断(评论的人和帖主)*********************************** -->                              
+                                <h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/> | <a href="#">删除</a></h6>
                                 <p>${ans.ansMessage }</p>
                             </div>
                         </div>
@@ -90,7 +107,7 @@
                     
                     <div class="row m0" id="replyForm" style="padding:30px 0px 0px 0px;">
                         <h4 class="heading">发表评论</h4>
-                        <form class="form" method="post" action="${pageContext.request.contextPath }/client/view_invitation">
+                        <form class="form" method="post" action="${pageContext.request.contextPath }/design/view_invitation">
 		  					<fieldset>
             						<div class="row m0" >
  										<div id="editor" ></div>

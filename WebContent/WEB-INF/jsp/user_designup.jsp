@@ -72,7 +72,7 @@
       <section id="ourTeam" class="row contentRowPad">
          <div class="container">
          	<div class="row sectionTitle">
-         		<a class="com_btn" href="${pageContext.request.contextPath}/client/design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
+         		<a class="com_btn" href="${pageContext.request.contextPath}/design//design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
          		<a class="com_btn" href="https://www.vam.ac.uk/designaring" target="_blank" style="float:right;">开始设计</a>
          	</div>
             <div class="row sectionTitle" style="border-bottom:3px solid #e1e1e1;border-top:3px solid #e1e1e1">
@@ -84,7 +84,7 @@
             			<div class="row">
                 			<div class="col-sm-6" >
                     			<div class="row m0 contactForm">
-                        			<form class="row m0" id="contactForm" method="post" name="contact" action="${pageContext.request.contextPath}/client/add_design" enctype="multipart/form-data">
+                        			<form class="row m0" id="contactForm" method="post" name="contact" action="${pageContext.request.contextPath}/design/add_design" enctype="multipart/form-data">
                             			<div class="row m0">
                                 			<label for="dname">作品名称 *</label>
                                 			<input type="text" class="form-control" name="dname" id="dname">

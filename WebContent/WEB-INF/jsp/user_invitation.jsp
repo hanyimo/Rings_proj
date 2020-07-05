@@ -93,7 +93,7 @@
                 <div class="col-sm-6">
                     <div class="row m0 testimonialStyle2">
                         <div class="testiInner">
-                            <a href="${pageContext.request.contextPath }/client/view_invitation/${in.invid}"><p style="text-align:center;">“${in.invTitle } ”</p></a>
+                            <a href="${pageContext.request.contextPath }/design/view_invitation/${in.invid}"><p style="text-align:center;">“${in.invTitle } ”</p></a>
                             <div class="row m0 clientInfo">  
 <!-- *****************************改这个图片的地址获取用户的******************************* -->                         
                                 <div class="thumbnail"><img src="${pageContext.request.contextPath }/statics/client/images/testimonial/1.png" alt=""></div>

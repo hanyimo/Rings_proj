@@ -22,7 +22,7 @@ import com.mysql.jdbc.StringUtils;
 import com.ssm.pojo.Design;
 
 
-@WebServlet("/client/add_design")
+@WebServlet("/design/add_design")
 public class FlieUploadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,7 +99,7 @@ public class FlieUploadController extends HttpServlet {
 			request.getSession().setAttribute("design",design);
 			System.out.println(design.getUid()+design.getDname()+design.getdMessage());
 			// 跳转到desginup页面
-			response.sendRedirect("/Rings_proj/client/designupto");
+			response.sendRedirect("/Rings_proj/design/designupto");
 			return;
 		} catch (Exception e) {
 			e.printStackTrace();
