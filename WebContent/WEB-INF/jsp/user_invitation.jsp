@@ -95,7 +95,7 @@
                         <div class="testiInner">
                             <a href="${pageContext.request.contextPath }/design/view_invitation/${in.invid}"><p style="text-align:center;">“${in.invTitle } ”</p></a>
                             <div class="row m0 clientInfo">  
-<!-- *****************************改这个图片的地址获取用户的******************************* -->                         
+<!-- *****************************改这个图片的地址获取用户的头像*******************************${pageContext.request.contextPath }/statics/上传文件目录/${in.uid.userPhoto} -->                         
                                 <div class="thumbnail"><img src="${pageContext.request.contextPath }/statics/client/images/testimonial/1.png" alt=""></div>
                                 <div class="clientName">${in.uid.userAlice }</div>
                             </div>

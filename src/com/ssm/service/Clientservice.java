@@ -1,6 +1,7 @@
 package com.ssm.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import com.ssm.pojo.Design;
@@ -18,7 +19,17 @@ public interface Clientservice {
 	
 	Invitation findInvitationById(Integer invid);
 	
+	Invitation findInvitationByTitle(String invTitle);
+	
+	int delInvitationById(Integer invid);
+	
+	int delInvitationAnsById(Integer invid);
+	
 	int addNewInvitationAns(InvitationAns ans);
 	
 	List<InvitationAns> findAllInvitationAns(Integer invid);
+	
+	int updateInvitationSuccess(Integer invid,Date invAuditDate);
+	
+	int updateInvitationNo(Integer invid,Date invAuditDate);
 }

@@ -1,7 +1,6 @@
 package com.ssm.controller;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +17,6 @@ import com.ssm.pojo.anscontact;
 import com.ssm.pojo.feedback;
 import com.mysql.jdbc.StringUtils;
 import com.ssm.pojo.Contact;
-import com.ssm.service.Clientservice;
 import com.ssm.service.UserService;
 
 @Controller

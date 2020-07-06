@@ -9,6 +9,13 @@ public class Invitation {
 	private String invMessage;
 	private Date invCreatDate;
 	private String status;
+	private Date invAuditDate;
+	public Date getInvAuditDate() {
+		return invAuditDate;
+	}
+	public void setInvAuditDate(Date invAuditDate) {
+		this.invAuditDate = invAuditDate;
+	}
 	public Integer getInvid() {
 		return invid;
 	}

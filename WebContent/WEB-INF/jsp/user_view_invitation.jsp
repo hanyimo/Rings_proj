@@ -75,7 +75,9 @@
                             	<h5><fmt:formatDate value="${invitation.invCreatDate}" pattern="yyyy-MM-dd"/></h5>
                             </div>
 <!-- ***********************************权限判断（帖主）*********************************** -->
-                            <a class="com_btn" href="" target="_blank" style="margin-top:15px;float:right;width:80px;text-align:center;">删除</a>
+							<%-- <c:if test="${invitation.uid.userName==loger.userName }"> --%>
+                            	<a class="com_btn" href="${pageContext.request.contextPath }/design/delinvitation/${invitation.invid}" target="_blank" style="margin-top:15px;float:right;width:80px;text-align:center;">删除</a>
+                        	<%-- </c:if> --%>
                         </div>
                         <div class="row m0 featureImg">
                             <h2 style="text-align:center;">${invitation.invTitle}</h2>
@@ -97,8 +99,13 @@
                             </div>
                             <div class="media-body">
                                 <h5 class="heading">${ans.user.userAlice }</h5>
-<!-- ***********************************权限判断(评论的人和帖主)*********************************** -->                              
-                                <h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/> | <a href="#">删除</a></h6>
+<!-- ***********************************权限判断(评论的人和帖主)*********************************** --> 
+                               <%--  <c:if test="${ans.user.userName==loger.userName || ans.user.userName==invitation.uid.userName}"> --%>
+                               		<h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/> | <a href="${pageContext.request.contextPath }/design/delinvitationAns/${invitation.invid}/${ans.aid}">删除</a></h6>
+                               <%--  </c:if> --%>
+                                <%-- <c:if test="${ans.user.userName!=loger.userName && ans.user.userName!=invitation.uid.userName}">
+                                	<h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/></h6>
+                                </c:if> --%>
                                 <p>${ans.ansMessage }</p>
                             </div>
                         </div>

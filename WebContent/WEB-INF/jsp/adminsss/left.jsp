@@ -61,7 +61,7 @@
 						  </li>
 					</ul>
 					<li class="active">
-						<a href="#">
+						<a href="${pageContext.request.contextPath }/design/invitation_manager">
 							<i class="menu-icon fa  fa-credit-card"></i>
 							<span class="menu-text"> 审核帖子 </span>
 						</a>

@@ -1,5 +1,6 @@
 package com.ssm.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -33,8 +34,20 @@ public class ClientserviceImpl implements Clientservice {
 		return designMapper.findAllInvitation();
 	}
 	@Override
+	public Invitation findInvitationByTitle(String invTitle) {
+		return designMapper.findInvitationByTitle(invTitle);
+	}
+	@Override
 	public Invitation findInvitationById(Integer invid) {
 		return designMapper.findInvitationById(invid);
+	}
+	@Override
+	public int delInvitationById(Integer invid) {
+		return designMapper.delInvitationById(invid);
+	}
+	@Override
+	public int delInvitationAnsById(Integer invid) {
+		return designMapper.delInvitationAnsById(invid);
 	}
 	@Override
 	public int addNewInvitationAns(InvitationAns ans) {
@@ -44,5 +57,12 @@ public class ClientserviceImpl implements Clientservice {
 	public List<InvitationAns> findAllInvitationAns(Integer invid) {
 		return designMapper.findAllInvitationAns(invid);
 	}
-	
+	@Override
+	public int updateInvitationSuccess(Integer invid,Date invAuditDate) {
+		return designMapper.updateInvitationSuccess(invid,invAuditDate);
+	}
+	@Override
+	public int updateInvitationNo(Integer invid,Date invAuditDate) {
+		return designMapper.updateInvitationNo(invid,invAuditDate);
+	}
 }

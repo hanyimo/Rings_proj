@@ -16,6 +16,7 @@
 		<id property="invid" column="invid"/>
 		<association property="uid" javaType="User">
 			<id property="uid" column="uid"/>
+			<result property="userName" column="userName"/>
 			<result property="userAlice" column="userAlice"/>
 			<result property="userPhoto" column="userPhoto"/>
 		</association>
@@ -33,9 +34,17 @@
 	<select id="findInvitationById" resultMap="invitationMap">
 		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid where invid=#{invid}
 	</select>
+	<!-- 根据invTitle查找invitation -->
+	<select id="findInvitationByTitle" resultMap="invitationMap">
+		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid where invTitle=#{invTitle}
+	</select>
 	<!-- 根据invid删除自己的invitation信息 -->
 	<delete id="delInvitationById" parameterType="int">
 		delete from ring_invitation where invid=#{invid}
+	</delete>
+	<!-- 根据aid删除invitationAns信息 -->
+	<delete id="delInvitationAnsById" parameterType="int">
+		delete from ring_invitation_ans where aid=#{aid}
 	</delete>
 	<!-- 添加回复invitationans信息 -->
 	<insert id="addNewInvitationAns" parameterType="InvitationAns">
@@ -54,6 +63,14 @@
 	<select id="findAllInvitationAns" resultMap="invitationAnsMap">
 		select * from ring_invitation_ans left join ring_user on ring_invitation_ans.uid=ring_user.uid where ring_invitation_ans.invid=#{invid}
 	</select>
+	<!-- 审核通过 -->
+	<update id="updateInvitationSuccess" >
+		update ring_invitation set status=1,invAuditDate=#{invAuditDate} where invid=#{invid}
+	</update>
+	<!-- 审核未通过 -->
+	<update id="updateInvitationNo" >
+		update ring_invitation set status=2,invAuditDate=#{invAuditDate} where invid=#{invid}
+	</update>
 </mapper>
 
 
