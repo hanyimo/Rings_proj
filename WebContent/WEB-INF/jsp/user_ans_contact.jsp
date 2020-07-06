@@ -1,74 +1,205 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>首页</title>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>修改商品分类</title>
 
-		<meta name="description" content="overview &amp; stats" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta name="description" content="overview &amp; stats" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/font-awesome/4.5.0/css/font-awesome.min.css" />
+<!-- bootstrap & fontawesome -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-		<!-- page specific plugin styles -->
+<!-- page specific plugin styles -->
 
-		<!-- text fonts -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/css/fonts.googleapis.com.css" />
+<!-- text fonts -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/css/fonts.googleapis.com.css" />
 
-		<!-- ace styles -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+<!-- ace styles -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/css/ace.min.css"
+	class="ace-main-stylesheet" id="main-ace-style" />
 
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/css/ace-skins.min.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/statics/server/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/css/ace-skins.min.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/statics/server/css/ace-rtl.min.css" />
 
-		
-		<script src="${pageContext.request.contextPath }/statics/server/js/ace-extra.min.js"></script>
-		<style type="text/css">
-			a{ text-decoration:none;color:white;} 
-			a:hover{ text-decoration:none;}
-		</style>
+
+<script src="${pageContext.request.contextPath }/statics/server/js/ace-extra.min.js"></script>
 	
-	</head>
+<script src="${pageContext.request.contextPath}/statics/client/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/statics/client/js/wangEditor.min.js"></script>
+<style type="text/css">
+	.w-e-text-container{
+      		width:700px;
+      	}
+      	label{
+      		font-size:20px;
+      	}
+      	.marginLeft{
+      		margin-left:140px;
+      		
+      	}
+      	.butm{
+      		margin-left:320px;
+      	}
+      	
+</style>
 
-	<body class="no-skin">
-		 <!-- 引入头部 -->
-   <%@ include file="adminsss/header.jsp" %>
+</head>
+
+<body class="no-skin">
+	<!-- 引入头部 -->
+	<%@ include file="adminsss/header.jsp"%>
 	<div class="main-container ace-save-state" id="main-container">
-			<script type="text/javascript">
+		<script type="text/javascript">
 				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>
-			<!-- 左侧导航栏 -->
- <%@ include file="adminsss/left.jsp" %>
-			<!-- 右侧版块 -->
-			<%@ include file="adminsss/right.jsp" %>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery-2.1.4.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript">
+		<!-- 左侧导航栏 -->
+		<%@ include file="adminsss/left.jsp"%>
+
+		<!-- 右侧版块 -->
+		<div class="hr hr-18 dotted hr-double"></div>
+		<h3 class="header green" style="margin-left: 220px;">回 复 用 户</h3>
+		<div class="row" style="margin-left: 200px; width: 3000px;">
+			<div class="col-sm-5">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h4 class="widget-title">${error }</h4>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main no-padding">
+							<form class="row m0" id="contactForm" method="post" name="ans" 
+									action="${pageContext.request.contextPath}/client/ansContact/${uid}/${contactId }">
+								 <div class="marginLeft">
+								 	<div class="formRow">
+								 		<label></label>
+        								<div id="editor" class="formRight w-e-text-container"></div>
+										<div style="height:30px;"></div>
+ 									</div>
+									<div class="clear">
+										<input type="hidden" name="ansMessage" id="ansMessage"/>
+									</div>
+								 </div>
+								<div class="form-actions center">
+									<div class="butm">
+										<input type="submit" class="btn btn-sm btn-success" value="提交" >
+										<a href="${pageContext.request.contextPath}/client/obtainContact">
+											<input type="button" class="btn btn-sm btn-success" value="返回" >
+										</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery-2.1.4.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/bootstrap.min.js"></script>
 
-		<!-- page specific plugin scripts -->
+	<!-- page specific plugin scripts -->
 
+
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery-ui.custom.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.ui.touch-punch.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.easypiechart.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.sparkline.index.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.pie.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.resize.min.js"></script>
+
+	<!-- ace scripts -->
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/ace-elements.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath }/statics/server/js/ace.min.js"></script>
+
+	<!-- inline scripts related to this page -->
+<script type="text/javascript">
+		<!-- 富文本框 -->
+		var E = window.wangEditor;
+		var editor = new E('#editor');
+		// 自定义菜单配置
+		editor.customConfig.menus = [
+	    	'head',// 标题
+	   	 	'bold',// 加粗
+	    	'fontSize',//字号
+	    	'fontName', //字体
+	    	'italic',//倾斜
+	    	'underline',//下划线
+	    	'foreColor',  // 文字颜色
+	    	'backColor',  // 背景颜色
+	    	'emoticon',  // 表情
+	    	'image',  // 插入图片
+		];
+		// 自定义配置颜色（字体颜色、背景色）
+		editor.customConfig.colors = [
+	'#000000','#eeece0','#1c487f','#4d80bf','#c24f4a','#8baa4a','#7b5ba1','#46acc8','#f9963b'
+		];
+		// 自定义字体
+		editor.customConfig.fontNames = [
+	    '宋体','黑体','华文新魏','微软雅黑','Arial','Tahoma','Verdana'
+	];
+		// 关闭粘贴样式的过滤
+		editor.customConfig.pasteFilterStyle = true;
+		// 忽略粘贴内容中的图片
+		editor.customConfig.pasteIgnoreImg = true;
+		// 上传图片到服务器
+		editor.customConfig.uploadImgServer = '${pageContext.request.contextPath}/client/conupload';
+		// 隐藏“网络图片”tab
+		editor.customConfig.showLinkImg = false;
+		// 将图片大小限制为 1M
+		editor.customConfig.uploadImgMaxSize = 1 * 1024 * 1024;
+		// 限制一次最多上传 5 张图片
+		editor.customConfig.uploadImgMaxLength = 5;
+		// 监听函数，可使用监听函数在上传图片的不同阶段做相应处理
+		editor.customConfig.uploadImgHooks = {
+			customInsert: function (insertImg, result, editor) {
+	    		for(var i in result){
+	    			insertImg('${pageContext.request.contextPath}/statics/client/contactFile/'+result[i]);
+	    		}
+			}
+		}
+		editor.create();
+		// 下面的script用于处理提交 
+	$(function(){
+	 $("form").submit(function(){
+		 // 把富文本框中的内容作为id为ansMessage的值
+		 $("#ansMessage").val(editor.txt.html());
+	 });
+	});
+<!--  富文本框结束 -->
 		
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery-ui.custom.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.easypiechart.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.sparkline.index.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.pie.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/jquery.flot.resize.min.js"></script>
-
-		<!-- ace scripts -->
-		<script src="${pageContext.request.contextPath }/statics/server/js/ace-elements.min.js"></script>
-		<script src="${pageContext.request.contextPath }/statics/server/js/ace.min.js"></script>
-
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
 			jQuery(function($) {
 				$('.easy-pie-chart.percentage').each(function(){
 					var $box = $(this).closest('.infobox');
@@ -283,9 +414,8 @@
 						$(this).addClass('dropup');
 					else $(this).removeClass('dropup');
 				});
-			
-			})
-		</script>
-	</body>
+
+			});
+</script>
+</body>
 </html>
-    

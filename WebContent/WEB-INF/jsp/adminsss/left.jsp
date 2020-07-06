@@ -69,12 +69,13 @@
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="#">
+						<a href="${pageContext.request.contextPath }/client/backstage">
 							<i class="menu-icon fa fa-envelope"></i>
 							<span class="menu-text"> 用户反馈 </span>
 						</a>
 						<b class="arrow"></b>
 					</li>
+					
 					<li class="">
 						<a href="#">
 							<i class="menu-icon fa fa-users"></i>
@@ -89,6 +90,13 @@
 						<span class="menu-text"> 订单管理 </span>
 
 						</a>
+					</li>
+					<li class="">
+						<a href="${pageContext.request.contextPath }/client/obtainContact">
+							<i class="menu-icon fa fa-envelope"></i>
+							<span class="menu-text"> 回复用户</span>
+						</a>
+						<b class="arrow"></b>
 					</li>
 				</ul><!-- /.nav-list -->
 			</div>

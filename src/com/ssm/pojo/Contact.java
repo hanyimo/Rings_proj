@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Contact {
 	private Integer contactId;
-	private Integer uid;
+	private User user;
 	private String cMessage;
 	private Date cDate;
 	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Contact(Integer contactId, Integer uid, String cMessage, Date dDate) {
+	public Contact(Integer contactId, User user, String cMessage, Date dDate) {
 		super();
 		this.contactId = contactId;
-		this.uid = uid;
+		this.user = user;
 		this.cMessage = cMessage;
 		this.cDate = cDate;
 	}
@@ -24,11 +24,11 @@ public class Contact {
 	public void setContactId(Integer contactId) {
 		this.contactId = contactId;
 	}
-	public Integer getUid() {
-		return uid;
+	public User getUser() {
+		return user;
 	}
-	public void setUid(Integer uid) {
-		this.uid = uid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getcMessage() {
 		return cMessage;

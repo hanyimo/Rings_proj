@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssm.dao.ContactMapper">
-	<resultMap type="Contact" id="contactMap">
+ 	<resultMap type="Contact" id="contactMap">
 		<id property="contactId" column="contactId"/>
 		<result property="cMessage" column="cMessage"/>
 		<result property="cDate" column="cDate" javaType="DATE"/>
@@ -11,15 +11,79 @@
 			<id property="uid" column="uid"/>
 		</association>
 	</resultMap>
+	<resultMap type="anscontact" id="ansContactMap">
+		<id property="ansContactId" column="ansContactId"/>
+		<result property="ansMessage" column="ansMessage"/>
+		<result property="ansDate" column="ansDate" javaType="DATE"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+			<result property="userName" column="userName"/>
+		</association>
+		<association property="contact" javaType="Contact">
+			<id property="contactId" column="contactId"/>
+			<result property="cMessage" column="cMessage"/>
+		</association>
+	</resultMap>
+	<resultMap type="feedback" id="feedbackMap">
+		<id property="fid" column="fid"/>
+		<association property="user" javaType="User">
+			<id property="uid" column="uid"/>
+		</association>
+	</resultMap> 
 	<!-- 联系我们 -->
 		<!-- 根据id获取用户信息 -->
-		<select id="findUserById" resultMap="contactMap">
-			select * from ring_contact left join ring_user 
-				on ring_contact.uid=ring_user.uid
-			    where contactId=#{contactId}
+		<select id="findUserById" parameterType="int" resultType="User">
+			select * from ring_user where uid=#{uid}
 		</select>
 		<!-- 添加内容到数据库 -->
 		<insert id="addNewContact" parameterType="Contact">
 			insert into ring_contact(cMessage,cDate) values (#{cMessage},#{cDate}) 
 		</insert>
+	<!-- 获取联系我们的内容 -->
+		<select id="findContact" resultMap="contactMap" >
+			select contactId,cMessage,cDate,ring_contact.uid,userName from ring_contact 
+				left join ring_user on ring_contact.uid=ring_user.uid
+				where status=#{status}
+		</select>
+	<!-- 回复用户 -->
+		<insert id="addNewAnsContact" parameterType="ansContact">
+			insert into ring_anscontact(uid,ansMessage,ansDate,contactId) values(#{uid},#{ansMessage},#{ansDate},#{contactId})
+		</insert>
+	<!-- 修改回复状态 -->
+		<update id="updateContactById" parameterType="int">
+			update ring_contact set status=1 where contactId=#{contactId}
+		</update>
+	<!-- 获取官方回复 -->
+		<select id="findAllAnsContact" resultMap="ansContactMap">
+			select ansContactId,ring_anscontact.uid,ansMessage,ansDate,ring_anscontact.contactId,userName,cMessage
+				from ring_anscontact 
+				left join ring_user on ring_anscontact.uid=ring_user.uid
+				left join ring_contact on ring_anscontact.contactId=ring_contact.contactId
+		</select>
+	<!-- 用户反馈功能 -->
+		<insert id="addNewFeedback" parameterType="feedback">
+			insert into ring_feedback(fMessage,fDate,subject) values(#{fMessage},#{fDate},#{subject})
+		</insert>
+	<!-- 动态获取用户反馈 -->
+		<select id="findAllFeedback" resultMap="feedbackMap">
+			select fid,ring_feedback.uid,subject,fMessage,fDate,userName from ring_feedback 
+				left join ring_user on ring_feedback.uid=ring_user.uid
+		</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 </mapper>
