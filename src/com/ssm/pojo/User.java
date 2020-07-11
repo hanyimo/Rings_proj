@@ -2,9 +2,16 @@ package com.ssm.pojo;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
 	private Integer uid;
+	@NotBlank(message="密码不能为空")
+	@Length(min=3,message="密码字符不能少于5个")
 	private String userPsw;
+	@NotBlank(message="账户不能为空")
+	@Length(min=2,message="账户字符不能少于2个")
 	private String userName;
 	private String userAlice;
 	private String userEmail;

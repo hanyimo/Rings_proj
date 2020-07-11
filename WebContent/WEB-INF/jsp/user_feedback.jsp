@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html lang="en">
  <head>
+  <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>用户反馈</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -146,8 +150,7 @@
     <section id="contactRow" class="row contentRowPad">
     	<div class="Content-Main">
 			<div class="Content-Main1">
-        		<h1>用户反馈</h1>
-        		<h5 style="color:red;">${error}</h5>
+        		<h1>用户反馈<str style="float:right;margin:5px 20px 0px 0px;color:#d6566a;font-size:15px;">${error}</str></h1>
     		</div>
     		<form name="feed" method="post" class="form-report" action="${pageContext.request.contextPath }/client/feedback" >
         		<div class="feedback">

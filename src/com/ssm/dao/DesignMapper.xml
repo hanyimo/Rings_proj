@@ -28,7 +28,7 @@
 	</insert>
 	<!-- 查找所有的invitation -->
 	<select id="findAllInvitation" resultMap="invitationMap">
-		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid
+		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid where status=1
 	</select>
 	<!-- 根据invid查找invitation -->
 	<select id="findInvitationById" resultMap="invitationMap">
@@ -41,6 +41,10 @@
 	<!-- 根据invid删除自己的invitation信息 -->
 	<delete id="delInvitationById" parameterType="int">
 		delete from ring_invitation where invid=#{invid}
+	</delete>
+	<!-- 根据invid删除invitationAns信息 -->
+	<delete id="delInvitationAnsByInvId" parameterType="int">
+		delete from ring_invitation_ans where invid=#{invid}
 	</delete>
 	<!-- 根据aid删除invitationAns信息 -->
 	<delete id="delInvitationAnsById" parameterType="int">

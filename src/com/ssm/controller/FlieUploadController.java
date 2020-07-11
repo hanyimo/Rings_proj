@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.mysql.jdbc.StringUtils;
 import com.ssm.pojo.Design;
+import com.ssm.pojo.User;
 
 
 @WebServlet("/design/add_design")
@@ -61,7 +62,7 @@ public class FlieUploadController extends HttpServlet {
 					String value = item.getString();// 获取值
 					if(StringUtils.isNullOrEmpty(value)) {
 						request.getSession().setAttribute("error","上传失败");
-						request.getRequestDispatcher("/client/designup").forward(request, response);
+						request.getRequestDispatcher("/design/designup").forward(request, response);
 						return;
 					}
 					if(name.equals("dname"))
@@ -87,13 +88,13 @@ public class FlieUploadController extends HttpServlet {
 					}
 					else {// 上传的不是图片
 						request.getSession().setAttribute("error","只能上传图片");
-						request.getRequestDispatcher("/client/designup").forward(request, response);
+						request.getRequestDispatcher("/design/designup").forward(request, response);
 						return;
 					}
 				}
 			}
 			//设置uid(session获取)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			uid = 1;
+			 uid = ((User)request.getSession().getAttribute("loginer")).getUid();
 			// 把对应的内容封装为Design对象
 			Design design = new Design(uid, dPhoto, dlink, dCreateDate, dname, dMessage);
 			request.getSession().setAttribute("design",design);

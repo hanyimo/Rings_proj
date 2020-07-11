@@ -4400,6 +4400,7 @@ abbr[title] {
 .searchForm .input-group .input-group-addon button:hover {
     background: #333
 }
+.formRight label { float: left; margin-right: 24px; padding: 2px 0; cursor: pointer; }
 
 .categories {
     margin-bottom: 25px
@@ -6211,6 +6212,8 @@ body.home-2 footer .copyRight {
     max-width: calc(100% - 120px);
     margin: auto
 }
+/*--media quiries end here--*/
+
 
 /*--------------------------------------------------*/
 			/*End Some Common Section*/

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		<mapper namespace="com.ssm.dao.userCartMapper">
+	<resultMap type="cart" id="listCart">
+		<id property="cid" column="cid"/>
+		<id property="uid" column="uid"/>
+		<association property="goods" javaType="goods">
+			<id property="gid" column="gid"/>
+			<result property="goodsName" column="goodsName"/>
+			<result property="goodsPrice" column="goodsPrice"/>
+		</association>
+		<association property="User" javaType="User">
+			<id property="uid" column="uid"/>
+		</association> 
+	</resultMap>
+	
+	<!-- 根据goodsId获取商品信息 -->
+	<!-- <select id="findGoodsByGid" resultMap="goodsMap">
+	select ring_goods.gid gid,ring_category.categoryId categoryId,goodsName,goodsDesc,goodsPrice,
+    goodsPhoto,goodsCreateDate,status,goodsScore,goodsStock,goodsCode,material 
+    from ring_goods left join ring_category 
+    on ring_goods.gid=ring_category.categoryId where ring_goods.gid=#{gid}
+	</select> -->
+	<!-- 根据商品id和用户id查找是否用户购物车存在此商品 -->
+	<select id="findCartByGidAndUid" resultType="cart">
+		select * from ring_cart where gid=#{gid} and uid=#{uid}
+	</select>
+	<!-- 添加商品 -->
+	<insert id="addCart" parameterType="cart">
+		insert into ring_cart(gid,uid,count) 
+			values(#{gid},#{uid},#{count})
+	</insert>
+	<!-- 根据商品id和用户id修改购物车中对应商品数量 -->
+	<update id="updateCart">
+		update ring_cart set count=count+1 where gid=#{gid} and uid=#{uid}
+	</update>
+	<!-- 根据用户id查询其购物车中所有商品 -->
+	<select id="findCartsByUid" parameterType="int" resultMap="listCart">
+		select * from ring_cart 
+			left join ring_user on ring_cart.uid=ring_user.uid
+			left join ring_goods on ring_cart.gid=ring_goods.gid
+			where ring_cart.uid=#{uid}
+	</select>
+	<!-- 根据购物车id移除出购物车 -->
+	<delete id="deleteCartByGid" parameterType="int">
+		delete from ring_cart  where cid=#{cid}
+	</delete>
+	<!-- 清空购物车 -->
+	<delete id="deleteCart" parameterType="int">
+	   delete from ring_cart where uid=#{uid}
+	</delete>
+	<!-- 查询所有的订单信息 --> 
+	 <select id="findAllOrders" resultType="order">
+		select * from ring_order where uid=#{uid}
+	</select> 
+	<!-- 生成订单 -->
+	 <insert id="addNewOrder">
+		insert into ring_order(uid,order_code,address,receiver,order_time,order_date,phone) 
+			values(#{uid},#{order_code},#{address},#{receiver},#{order_time},#{order_date},#{phone})
+	</insert>
+	<!-- 发货 -->
+	<update id="updateSuccess" >
+		update ring_order set shipment_status="已发货" where oid=#{oid}
+	</update>
+	<!-- 未发货-->
+	<update id="updateNo" >
+		update ring_order set shipment_status="未发货" where oid=#{oid}
+	</update>
+	<!-- 查询所有的订单信息 --> 
+	 <select id="findAllOrdersto" resultType="order">
+		select * from ring_order
+	</select> 
+</mapper>

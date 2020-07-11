@@ -9,7 +9,7 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>Contact</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -97,7 +97,7 @@
       </style>
    </head>
 <body>
-        <!-- 引入头部 -->
+   <!-- 引入头部 -->
    <%@ include file="client/header.jsp" %>
     
     <section id="breadcrumbRow" class="row">
@@ -113,12 +113,11 @@
         </div>
     </section>
     <section id="contactRow" class="row contentRowPad">
-        <div class="container">
+        <div class="container" style="width:80%;">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="row m0">
-                        <h4 class="contactHeading heading">联 系 我 们</h4>
-                        <h4 style="color:red;">${error }</h4>
+                    <div class="row m0" style="width:400px;">
+                        <h4 class="contactHeading heading">联 系 我 们<str style="float:right;margin:5px 150px 0px 0px;color:#d6566a;font-size:15px;">${error}</str></h4>
                     </div>
                     <div class="row m0 contactForm">
                         <form class="row m0" id="contactForm" method="post" name="contact" action="${pageContext.request.contextPath}/client/contact">
@@ -191,9 +190,9 @@
             </div>
         </div>
     </section>
-      <section id="googleMapRow" class="row">
+      <section id="googleMapRow" class="row" >
       		
-        <div class="row m0" id="mapBox">
+        <div class="row m0" id="mapBox" style="margin:50px auto;">
         	<div class="top">
         		<h2>官方回复</h2>
         	</div>

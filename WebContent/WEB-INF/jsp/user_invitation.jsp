@@ -9,7 +9,7 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>故事空间</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -58,7 +58,8 @@
          </div>
       </section>
       <section id="testimonialTabs" class="row contentRowPad">
-      	<!-- 发帖 -->
+      	<!-- 发帖 没登录不能发 -->
+      	<c:if test="${!empty loginer}">
       	<div class="container">
   		<div class="row sectionTitle">
             <h2>我的故事</h2>
@@ -83,6 +84,7 @@
 		<input type="hidden" name="invMessage" id="invMessage"/>
 		</form>
 		</div>
+		</c:if>
 		<div style="margin:100px 0px;"></div>
         <div class="container">
             <div class="row sectionTitle">
@@ -95,8 +97,8 @@
                         <div class="testiInner">
                             <a href="${pageContext.request.contextPath }/design/view_invitation/${in.invid}"><p style="text-align:center;">“${in.invTitle } ”</p></a>
                             <div class="row m0 clientInfo">  
-<!-- *****************************改这个图片的地址获取用户的头像*******************************${pageContext.request.contextPath }/statics/上传文件目录/${in.uid.userPhoto} -->                         
-                                <div class="thumbnail"><img src="${pageContext.request.contextPath }/statics/client/images/testimonial/1.png" alt=""></div>
+<!-- *****************************改这个图片的地址获取用户的头像*******************************${pageContext.request.contextPath }/statics/userupload/${in.uid.userPhoto} -->                         
+                                <div class="thumbnail"><img src="${pageContext.request.contextPath }/statics/client/userupload/${in.uid.userPhoto}" alt=""></div>
                                 <div class="clientName">${in.uid.userAlice }</div>
                             </div>
                         </div>
@@ -124,7 +126,6 @@
     	'backColor',  // 背景颜色
     	'justify',  // 对齐方式
     	'emoticon',  // 表情
-    	'image',  // 插入图片
     	'undo',  // 撤销
     	'redo'  // 重复
 	];

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    	<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>首页</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -85,38 +86,40 @@
                   <div  class="diamond_j">
                   </div>
                   <div class="diamond_b">
-                     <img alt="" class="img-responsive"  src="${pageContext.request.contextPath }/statics/client/images/ring.png">
+                     <img alt="" class="img-responsive"  src="${pageContext.request.contextPath }/statics/client/images/rings.jpg"
+                     style="margin-top:-150px;margin-left:-60px;">
                   </div>
                </div>
                <div   class="col-md-6  ring_cont">
-                  <h2>About D-shine</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pellentesque, diam viverra lacinia sodales, elit turpis consequat sapien, nec feugiat ex urna quis libero. Sed vel purus iaculis, lobortis neque vel, commodo enim. Quisque sollicitudin arcu ullamcorper libero consectetur commodo. </p>
-                  <p>
-                     lobortis neque vel, commodo enim!
-                  </p>
-                  <a  class="com_btn" href="${pageContext.request.contextPath}/product">Start shopping</a>
+                  <h2>世界美好与你环环相扣</h2>
+                  <p>钻石，是永恒的标志，纯洁透明，经久不变，钻戒就像是情人炯炯有神的眼睛，深情的注视着你，它是纯洁爱情的标志，表示对爱情的永恒追求和忠贞。“钻石恒久远，一颗永流传”</p>
+                  <p>Rings戒指寓意为“一生·唯爱”，表示你我是唯一永恒的</p>
+                  <a  class="com_btn" href="${pageContext.request.contextPath}/">开始购物</a>
                </div>
             </div>
          </div>
       </section>
-         <!-- 循环获取最新产品，显示6个 -->
+      
       <section id="shopRings">
          <div class="sectionTitle">
             <h3>最新产品</h3>
-            <h5>know more about our new collection</h5>
+            <h5>New goods</h5>
          </div>
+            <!-- 循环获取最新产品，显示5个  -->
          <div class="d-carousel-cener owl-carousel">
+          <c:forEach items="${gss}" var="gss">
             <div class="dc-inner">
-               <a href="${pageContext.request.contextPath }/singleproduct">
-                  <img alt="ring" src="${pageContext.request.contextPath }/statics/client/images/carousel/1.png" >
+               <a href="${pageContext.request.contextPath }/singleproduct/${gss.gid}">
+                  <img alt="ring" src="${pageContext.request.contextPath }/statics/file/${gss.goodsPhoto}" style="width:300px;height:300px;">
                   <div class="dc-containt">
-                     <h2>Cushion</h2>
-                     <p>Bar Set Anniversary Ring</p>
+                     <h2 style="padding-top:50px;">${gss.goodsName}</h2>
+                     <p>${gss.goodsDesc }</p>
                   </div>
                </a>
             </div>
-            
+        </c:forEach>
           </div>
+ 
         </section>    
          <!-- 我们的设计 -->     
       <section id="shopFeatures_new">
@@ -176,17 +179,26 @@
             </div>
             <div class="row">
             <!-- 循环获取，显示六个在前端 -->
+            <c:forEach items="${hotgs }" var="hs">
                <div class="col-sm-3 product">
                   <div class="productInner row m0">
                      <div class="row m0 imgHov">
-                        <img src="${pageContext.request.contextPath }/statics/client/images/product/1.png" alt="">
+                        <img src="${pageContext.request.contextPath }/statics/file/${hs.goodsPhoto}" style="width:280px;height:250px;"/>
                         <div class="row m0 hovArea">
                            <div class="row m0 icons">
+                           	  <!-- 没登录跳到login -->
+                           	  <c:if test="${empty loginer}">
                               <ul class="list-inline">
-                                 <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                 <li><a href="${pageContext.request.contextPath }/user/login"><i class="fas fa-heart"></i></a></li>
                               </ul>
+                              </c:if>
+                           	  <c:if test="${!empty loginer}">
+                              <ul class="list-inline">
+                                 <li><a href="${pageContext.request.contextPath }/add_new_goodsss_store/${hs.gid}"><i class="fas fa-heart"></i></a></li>
+                              </ul>
+                              </c:if>
                            </div>
-                           <div class="row m0 proType"><a href="#">Baccarat</a></div>
+                           <div class="row m0 proType"><a href="#">${hs.goodsName }</a></div>
                            <div class="row m0 proRating">
                               <i class="fas fa-star-o"></i>
                               <i class="fas fa-star-o"></i>
@@ -194,45 +206,54 @@
                               <i class="fas fa-star-o"></i>
                               <i class="fas fa-star-o"></i>
                            </div>
-                           <div class="row m0 proPrice"><i class="fas fa-usd"></i>125.00</div>
+                           <div class="row m0 proPrice"><i class="fas fa-usd"></i>￥${hs.goodsPrice }</div>
                         </div>
                      </div>
-                     <div class="row m0 proName"><a href="single-product.html">Donec aliquam</a></div>
+                     <div class="row m0 proName"><a href="${pageContext.request.contextPath }/singleproduct/${hs.gid}"">${hs.goodsName }</a></div>
+                     <!-- 没登录，跳到登录 -->
+                     <c:if test="${empty loginer}">
                      <div class="row m0 proBuyBtn">
-                        <a class="addToCart btn" href="#">add to cart</a>
+                        <a class="addToCart btn" href="${pageContext.request.contextPath }/user/login">加入购物车</a>
                      </div>
+                     </c:if>
+                     <!-- 登录状态（加入购物车） -->
+                     <c:if test="${!empty loginer}">
+                     <div class="row m0 proBuyBtn">
+                        <a class="addToCart btn" href="${pageContext.request.contextPath }/client/add_cart/${hs.gid}">加入购物车</a>
+                     </div>
+                     </c:if>
                   </div>
                </div> 
+             </c:forEach>
          </div>
       </section>
       <!--顾客说-->
       <section id="testimonialTabs" class="row contentRowPad">
          <div class="container">
             <div class="row sectionTitle">
-               <h3>some words from our customers</h3>
-               <h5>we satisfied more than 700 customers</h5>
+               <h3>客户的一些话</h3>
             </div>
             <div class="row">
                <div class="tab-content testiTabContent">
                   <div role="tabpanel" class="tab-pane active" id="testi1">
-                     <p><span class="t_q_start">“</span> D-Shine is really excellent site for jewellery. I am very happy with the D-Shine products and dedicated services from them. D-Shine is really excellent site for jewellery. <span class="t_q_end">”</span></p>
-                     <h5 class="customerName">Dwayne johnson</h5>
+                     <p><span class="t_q_start">“</span>  这确实是选择戒指的绝佳之地。我对Rings产品及其提供的专用服务感到非常满意。<span class="t_q_end">”</span></p>
+                     <h5 class="customerName">德韦恩·约翰逊</h5>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="testi2">
-                     <p><span class="t_q_start">“</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum justo accumsan felis faucibus vestibulum. Integer a ex orci. Cras sit amet efficitur nisl, et vestibulum orci. <span class="t_q_end">”</span></p>
-                     <h5 class="customerName">Jonh add</h5>
+                     <p><span class="t_q_start">“</span> 我简直太喜欢Rings的设计空间了，大家可以去体验体验，Pick它。 <span class="t_q_end">”</span></p>
+                     <h5 class="customerName">乔恩·加</h5>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="testi3">
-                     <p><span class="t_q_start">“</span> D-Shine is really excellent site for jewellery. I am very happy with the D-Shine products and dedicated services from them. D-Shine is really excellent site for jewellery. <span class="t_q_end">”</span></p>
-                     <h5 class="customerName">william parker</h5>
+                     <p><span class="t_q_start">“</span> 这故事空间也太美好了吧，美好的故事，配上美好的戒指。<span class="t_q_end">”</span></p>
+                     <h5 class="customerName">威廉·帕克</h5>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="testi4">
-                     <p><span class="t_q_start">“</span> Donec in velit eget lacus convallis dapibus. Nulla ultrices nulla sit amet justo pretium, ut tristique diam ultrices. Nunc efficitur mauris sit amet imperdiet <span class="t_q_end">”</span></p>
-                     <h5 class="customerName">Will smith</h5>
+                     <p><span class="t_q_start">“</span> 这网站真的好人性化，各种功能齐全，就算不买东西也想来这玩一玩。 <span class="t_q_end">”</span></p>
+                     <h5 class="customerName">威尔·史密斯</h5>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="testi5">
-                     <p><span class="t_q_start">“</span> D-Shine is really excellent site for jewellery. I am very happy with the D-Shine products and dedicated services from them. D-Shine is really excellent site for jewellery. <span class="t_q_end">”</span></p>
-                     <h5 class="customerName">Dwayne johnson</h5>
+                     <p><span class="t_q_start">“</span> Rings可以联系官方定制戒指欸，太棒了吧，太满意了 <span class="t_q_end">”</span></p>
+                     <h5 class="customerName">德韦恩·约翰逊</h5>
                   </div>
                </div>
                <ul class="nav nav-tabs" role="tablist" id="testiTab">

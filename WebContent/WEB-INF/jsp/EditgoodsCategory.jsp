@@ -73,7 +73,8 @@
 								</fieldset>
 								<div class="form-actions center">
 									<input type="submit" class="btn btn-sm btn-success" value="修改" />
-									<input type="button" class="btn btn-sm btn-success" id="back" name="back" value="返回" >
+								<a href="${pageContext.request.contextPath }/server/goodsManage">
+									<input type="button" class="btn btn-sm btn-success"  value="返回" ></a>
 								</div>
 							</form:form>
 						</div>

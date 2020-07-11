@@ -54,33 +54,35 @@
 		<%@ include file="adminsss/right.jsp"%>
 		<div style="margin-top:40px;padding-left:30px;">
 			<div class="col-xs-12">
-			 <h3 class="header smaller lighter blue">商品分类列表</h3>
+			 <h3 class="header smaller lighter blue">商品分类列表  </h3>
+		     <p style="color:red">${error }</p>
 				<table id="simple-table" class="table  table-bordered table-hover" >	
 					<thead>
 						<tr>
-							<th>商品分类ID</th>
-							<th>分类名称</th>
-							<th colspan="3">操作</th>
+							<th class="center">商品分类ID</th>
+							<th class="center">分类名称</th>
+							<th colspan="3" class="center">操作</th>
 		               </tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${categories}" var="cate">
 						<tr>
-					    	<td valign="middle">${cate.categoryId }</td>
-							<td valign="middle">${cate.category }</td>
-							<td valign="middle"><!-- 编辑 -->
+					    	<td class="center">${cate.categoryId }</td>
+							<td class="center">${cate.category }</td>
+							<td class="center"><!-- 编辑 -->
 								<a href="${pageContext.request.contextPath }/server/EditgoodsCate/${cate.categoryId}"><button class="btn btn-xs btn-info">
 										<i class="ace-icon fa fa-pencil bigger-120"></i>
 									</button>
 									</a>
 							</td>
-							<td align="center"><!-- 添加 -->
+							<td class="center"><!-- 添加 -->
 								<a href="${pageContext.request.contextPath }/server/addgoodsCate"><button class="btn btn-xs btn-danger">
 										<i class="ace-icon fa glyphicon-plus bigger-120"></i>
 									</button></a>
 							</td>
-							<td align="center"><!-- 删除 -->
-								<a href=""><button class="btn btn-xs btn-danger">
+							<td class="center"><!-- 删除 -->
+								<a href="${pageContext.request.contextPath }/server/del_category/${cate.categoryId}">
+								<button class="btn btn-xs btn-danger" name="delete" id="delete" onclick="return confirm('你确定要删除嘛？');">
 										<i class="ace-icon fa fa-trash-o bigger-120"></i>
 									</button>
 									</a>
@@ -102,7 +104,7 @@
 		</script>
 		<script
 			src="${pageContext.request.contextPath }/statics/server/js/bootstrap.min.js"></script>
-
+       
 		<!-- page specific plugin scripts -->
 
 
@@ -126,9 +128,8 @@
 			src="${pageContext.request.contextPath }/statics/server/js/ace-elements.min.js"></script>
 		<script
 			src="${pageContext.request.contextPath }/statics/server/js/ace.min.js"></script>
-
 		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
+	<!-- 	<script type="text/javascript">
 			jQuery(function($) {
 				$('.easy-pie-chart.percentage').each(function(){
 					var $box = $(this).closest('.infobox');
@@ -344,7 +345,8 @@
 					else $(this).removeClass('dropup');
 				});
 			
-			})
-		</script>
+			});
+		</script>-->
+
 </body>
 </html>

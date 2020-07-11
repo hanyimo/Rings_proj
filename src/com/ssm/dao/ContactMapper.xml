@@ -37,7 +37,7 @@
 		</select>
 		<!-- 添加内容到数据库 -->
 		<insert id="addNewContact" parameterType="Contact">
-			insert into ring_contact(cMessage,cDate) values (#{cMessage},#{cDate}) 
+			insert into ring_contact(uid,cMessage,cDate) values(#{uid},#{cMessage},#{cDate}) 
 		</insert>
 	<!-- 获取联系我们的内容 -->
 		<select id="findContact" resultMap="contactMap" >
@@ -62,7 +62,7 @@
 		</select>
 	<!-- 用户反馈功能 -->
 		<insert id="addNewFeedback" parameterType="feedback">
-			insert into ring_feedback(fMessage,fDate,subject) values(#{fMessage},#{fDate},#{subject})
+			insert into ring_feedback(uid,fMessage,fDate,subject) values(#{uid},#{fMessage},#{fDate},#{subject})
 		</insert>
 	<!-- 动态获取用户反馈 -->
 		<select id="findAllFeedback" resultMap="feedbackMap">

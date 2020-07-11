@@ -5,10 +5,13 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>Design</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -58,7 +61,7 @@
                	  <div class="thumbnail">
                      <img src="${pageContext.request.contextPath }/statics/client/upload/${design.dPhoto}" title="${design.dMessage }" alt="${design.dname}" style="width:100%;height:250px;">
                      <div class="caption" style="margin:10px 0px 0px 0px;padding:0px;">
-                        <a href="${design.dlink }"><h4>${design.dname}</h4></a>
+                        <a href="${design.dlink }" target="_blank"><h4>${design.dname}</h4></a>
                         <h5><fmt:formatDate value="${design.dCreateDate}" pattern="yyyy-MM-dd"/></h5>
                      </div>
                   </div>

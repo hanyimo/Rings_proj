@@ -7,7 +7,7 @@
 <head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>首页</title>
+		<title>反馈</title>
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<!-- bootstrap & fontawesome -->
@@ -114,8 +114,8 @@ a:hover{
     <%@ include file="adminsss/header.jsp" %>
 	<!-- 左侧导航栏 -->
  	<%@ include file="adminsss/left.jsp" %>
-		<div class="table-wrapper">
-   		 <table class="fl-table">
+		<div class="table-wrapper" >
+   		 <table class="fl-table" style="margin-left:70px;width:1000px;height:500px;">
         	<thead>
         		<tr>
             		<th>编号</th>
@@ -131,7 +131,7 @@ a:hover{
             				<td>${feeds.fid }</td>
             				<td>${feeds.user.userName }</td>
             				<td>${feeds.subject }</td>
-            				<td>${feeds.fMessage }</td>
+            				<td style="text-align:left">${feeds.fMessage }</td>
             				<td>
             					<span>
 									<fmt:formatDate value="${feeds.fDate }" pattern="yyyy-MM-dd"/>

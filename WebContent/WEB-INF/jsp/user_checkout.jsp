@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html lang="en">
  <head>
+  <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>结算</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -35,7 +40,7 @@
             <div class="container">
                 <h4 class="fleft">结算</h4>
                 <ul class="breadcrumb fright">
-                    <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/">首页</a></li>
                     <li class="active">结算</li>
                 </ul>
             </div>
@@ -44,102 +49,63 @@
     
     <section class="row contentRowPad">
         <div class="container">
-            <div class="row">
-                
-                <div class="col-sm-5 orderSummaryRow">
-                    <div class="row orderSummary m0">
-                        <h4 class="heading">Order summary</h4>
-                        <div class="row m0 orderSummaryInner table-responsive">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Products</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Dining Table</td>
-                                        <td>$840</td>
-                                    </tr>
-                                    <tr>
-                                        <td>office furniture</td>
-                                        <td>$420</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td>cart subtotal</td>
-                                        <td>$1260</td>
-                                    </tr>
-                                    <tr>
-                                        <td>shipping</td>
-                                        <td>Free Shipping</td>
-                                    </tr>
-                                    <tr>
-                                        <td>order total price</td>
-                                        <td>$1260</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <form action="#" method="post" role="form" class="row checkoutForm">
-                <div class="row m0">
-                    <div class="col-sm-5" id="billingAddress">
-                        <h4 class="heading">Billing Address</h4>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="text" name="firstName" id="firstName" placeholder="First Name" class="form-control">
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="lastName" id="lastName" placeholder="Last Name" class="form-control">
-                            </div>
-                        </div>
-                        <input type="text" name="companyName" id="companyName" placeholder="Company Name" class="form-control">
-                        <input type="text" name="address" id="address" placeholder="Address" class="form-control">
-                        <input type="text" name="townCity" id="townCity" placeholder="Town / City" class="form-control">
-                        <input type="text" name="stateCountry" id="stateCountry" placeholder="State / Country" class="form-control">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="text" name="zipcode" id="zipcode" placeholder="Postcode / ZIP" class="form-control">
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="tel" name="phone" id="phone" placeholder="Phone" class="form-control">
-                            </div>
-                        </div>
-
-                        <input type="checkbox" name="shippingAddressEscape" id="shippingAddressEscape">
-                        <label for="shippingAddressEscape">Ship Items To The Above Billing Address</label>                    
-                    </div>
-                    <div class="col-sm-5" id="shippingAddress">
+            <form action="${pageContext.request.contextPath }/client/order_goods" method="post" role="form" class="row checkoutForm">
+                    <div class="col-sm-5" id="billingAddress" style="float-left:800px;">
                         <h4 class="heading">Shipping Address</h4>
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" name="firstName" id="firstName" placeholder="First Name" class="form-control">
+                                <input type="text" name="receiver" id="receiver" placeholder="收件人" class="form-control" required>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" name="lastName" id="lastName" placeholder="Last Name" class="form-control">
+                                <input type="text" name="companyName" id="companyName" placeholder="公司名称" class="form-control" required>
                             </div>
                         </div>
-                        <input type="text" name="companyName" id="companyName" placeholder="Company Name" class="form-control">
-                        <input type="text" name="address" id="address" placeholder="Address" class="form-control">
-                        <input type="text" name="townCity" id="townCity" placeholder="Town / City" class="form-control">
-                        <input type="text" name="stateCountry" id="stateCountry" placeholder="State / Country" class="form-control">
+                        <input type="text" name="address" id="address" placeholder="收货地址" class="form-control" required>
+                        <input type="text" name="townCity" id="townCity" placeholder="城镇/城市" class="form-control" required>
+                        <input type="text" name="stateCountry" id="stateCountry" placeholder="州/国家" class="form-control" required>
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" name="zipcode" id="zipcode" placeholder="Postcode / ZIP" class="form-control">
+                                <input type="text" name="zipcode" id="zipcode" placeholder="邮政编码" class="form-control"required>
                             </div>
                             <div class="col-sm-6">
-                                <input type="tel" name="phone" id="phone" placeholder="Phone" class="form-control">
+                                <input type="tel" name="phone" id="phone" placeholder="电话" class="form-control" required>
                             </div>
-                        </div>                   
+                        </div>
+                    </div>
+                    <div class="row" style="float:left:45%;">
+                <div class="col-sm-5 orderSummaryRow">
+                     <div class="row orderSummary m0">
+                       <h4 class="heading">结算</h4> 
+                        <div class="row m0 orderSummaryInner table-responsive" id="billingAddress" style="width:500px;">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;">商品</th>
+                                        <th style="text-align:center;">数量</th>
+                                        <th style="text-align:center;">单价</th>
+                                        <th style="text-align:center;">总价</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 <c:set var="sum" value="0"/>
+    				              <c:forEach items="${goods }" var="good">
+                                    <tr>
+                                        <td style="text-align:center;">${good.goods.goodsName}</td>
+                                        <td style="text-align:center;">${good.count}</td>
+                                        <td style="text-align:center;">${good.goods.goodsPrice}</td>
+                                        <td style="text-align:center;">${good.count*good.goods.goodsPrice }</td>
+                                    </tr>
+                                    <c:set var="total" value="${total + good.count*good.goods.goodsPrice }"/>
+                                  </c:forEach>
+                                </tbody>
+                            </table>
+                            <p style="margin:50px 0px 0px 270px;"><strong>总计：</strong><c:out value="${total }" /></p>
+                        </div>
                     </div>
                 </div>
+            </div>
+                  
                 
                 <div class="row m0 paymentMethodMode">
                     <div class="col-sm-12">
@@ -153,7 +119,7 @@ the funds have cleared in our account.</p>
                                 <input type="radio" name="pamentMode" id="cheque"> Cheque Payment
                             </label>
                             <label>
-                                <input type="radio" name="pamentMode" id="paypal"> Paypal <img src="images/card.png" alt="">
+                               <input type="radio" name="pamentMode" id="paypal"> Paypal <img src="images/card.png" alt="">
                             </label>
                         </div>
                     </div>
@@ -161,7 +127,7 @@ the funds have cleared in our account.</p>
                 
                 <div class="row m0">
                     <div class="col-sm-12">
-                        <button class="btn btn-primary filled btn-sm" type="submit">submit</button>
+                        <button class="btn btn-primary filled btn-sm" type="submit" ><str onclick="myFunction()">submit</str></button>
                     </div>
                 </div>
             </form>
@@ -170,6 +136,16 @@ the funds have cleared in our account.</p>
     
     <!-- 引入尾部 -->
   <%@ include file="client/footer.jsp" %>
+   <script>
+function myFunction() {
+  var txt;
+  if (confirm("请确认支付")) {
+	  alert("支付成功！");
+  } else {
+	  alert("支付失败！");
+  }
+}
+</script>
 </body>
 </html>
     

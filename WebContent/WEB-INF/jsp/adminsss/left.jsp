@@ -48,13 +48,13 @@
 							<li class="">
 								<a href="${pageContext.request.contextPath }/server/goodsManage" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
-									商品分类管理
+									<a href="${pageContext.request.contextPath }/server/goodsManage">商品分类管理</a>
 								</a>
 								
 								<li class="">
 										<a href="#" class="dropdown-toggle">
 												<i class="menu-icon fa fa-caret-right"></i>
-											商品添加管理
+										<a href="${pageContext.request.contextPath }/server/goodsTable">商品添加管理</a>
 										</a>
 										<b class="arrow fa fa-angle-down"></b>
 							  </li>
@@ -75,20 +75,11 @@
 						</a>
 						<b class="arrow"></b>
 					</li>
-					
-					<li class="">
-						<a href="#">
-							<i class="menu-icon fa fa-users"></i>
-							<span class="menu-text">用户管理 </span>
-						</a>
-						<b class="arrow"></b>
-					</li>
 					</li>
 			       <li class="">
-						<a href="#" class="dropdown-toggle">
+						<a href="${pageContext.request.contextPath }/client/admin_order">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
-						<span class="menu-text"> 订单管理 </span>
-
+						    <span class="menu-text"> 订单管理 </span>
 						</a>
 					</li>
 					<li class="">

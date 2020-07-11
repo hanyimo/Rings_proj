@@ -12,45 +12,31 @@
 						</ul><!-- /.breadcrumb -->
 					</div>
 			<div >
-			<div class="page-header">
-							<h1>
-								审核帖子
-								<small>
-									<i class="ace-icon fa fa-angle-double-right"></i>
-									overview &amp; stats
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						<a href="${pageContext.request.contextPath }/server/goodsManage"><button class="btn btn-success" style="margin-top:50px;margin-left:70px;width:160px;height:60px;">
 							<i class="ace-icon fa fa-list"></i>
 							<span>商品管理</span>
 						</button></a>
 
-						<button class="btn btn-info" style="margin-top:50px;margin-left:80px;width:160px;height:60px;">
+						<a href="${pageContext.request.contextPath }/design/invitation_manager"><button class="btn btn-info" style="margin-top:50px;margin-left:80px;width:160px;height:60px;">
 							<i class="ace-icon fa fa-credit-card"></i>
 							<span>审核帖子</span>
-						</button>
+						</button></a>
 
-						<button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
+						<a href="${pageContext.request.contextPath }/client/backstage"><button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
 							<i class="ace-icon fa  fa-envelope"></i>
-							<a href="${pageContext.request.contextPath }/client/backstage"><span>用户反馈</span></a>
-						</button>
-
-						<button class="btn btn-danger" style="margin-top:50px;margin-left:100px;width:160px;height:60px;">
-							<i class="ace-icon fa fa-users"></i>
-							<span>用户管理</span>
-						</button>
-						<button class="btn btn-danger" style="margin-top:50px;margin-left:110px;width:160px;height:60px;">
+							<span>用户反馈</span>
+						</button></a>
+						
+						<a href="${pageContext.request.contextPath }/client/admin_order"><button class="btn btn-danger" style="margin-top:50px;margin-left:110px;width:160px;height:60px;">
 							<i class="ace-icon fa  fa-pencil-square-ol"></i>
 							<span>订单管理</span>
-						</button>
+						</button></a>
 						
-						
-						<button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
+						<a href="${pageContext.request.contextPath }/client/obtainContact"><button class="btn btn-warning" style="margin-top:50px;margin-left:90px;width:160px;height:60px;">
 							<i class="ace-icon fa  fa-envelope"></i>
-							<a href="${pageContext.request.contextPath }/client/obtainContact"><span>回复用户</span></a>
-						</button>
+							<span>回复用户</span>
+						</button></a>
 						
 					</div>
 		</div>

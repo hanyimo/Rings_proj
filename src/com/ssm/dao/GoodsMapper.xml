@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.GoodsMapper">
+	<resultMap type="goods" id="goodsMap">
+		<id property="gid" column="gid"/>
+		<association property="category" javaType="Category">
+			<id property="categoryId" column="categoryId"/>
+			<result property="category" column="categoryss"/>
+		</association>
+	</resultMap>
+	<!-- 根据 goodsdCode 查找编码 -->
+	<select id="findgoodsCode" resultType="goods">
+		select * from ring_goods where goodsCode=#{goodsCode}
+	</select>
+<!-- 添加商品信息 -->
+	<insert id="addNewGoods" parameterType="goods">
+		insert into ring_goods(goodsName,goodsCode,goodsPrice,category,goodsDesc,
+			goodsPhoto,goodsCreateDate,status,material) 
+			values(#{goodsName},#{goodsCode},#{goodsPrice},#{category.categoryId},
+			#{goodsDesc},#{goodsPhoto},#{goodsCreateDate},#{status},#{material})
+	</insert>
+	<!-- 循环获取商品信息 -->
+	<select id="findAllgoods" resultMap="goodsMap">
+			select ring_goods.*,ring_category.category categoryss,categoryId 
+			from ring_goods,ring_category where ring_goods.category=ring_category.categoryId 
+			order by goodsCreateDate desc;
+	</select>
+	<!-- 根据分类Id循环获取商品信息显示到前台且status="在售" -->
+	<select id="findAllgoodsByCate" resultMap="goodsMap">
+			select ring_goods.*,ring_category.* from ring_goods,ring_category 
+			where ring_goods.category=ring_category.categoryId 
+			and ring_goods.category=#{category.categoryId} and status=1;
+	</select>
+	<!-- 根据gid获取相关商品信息 -->
+	<select id="findgoodsById" resultMap="goodsMap">
+			select ring_goods.*,ring_category.* from ring_goods,ring_category 
+			where ring_goods.category=ring_category.categoryId and gid=#{gid}
+	</select>
+	<!-- 获取相似商品信息 -->
+	<select id="findLikedgoods" resultMap="goodsMap">
+		select ring_goods.*,ring_category.* from ring_goods,ring_category 
+			where ring_goods.category=ring_category.categoryId and ring_category.categoryId=#{categoryId} 
+			order by ring_goods.gid desc limit 5
+	</select>
+<!-- 根据 gid 修改商品信息 -->
+	<update id="updategoodsById" parameterType="goods">
+		update ring_goods 
+		   <set> 
+		        <if test="goodsName != null">
+		        goodsName=#{goodsName},
+		        </if>
+		         <if test="goodsCode != null">
+		        goodsCode=#{goodsCode},
+		        </if>
+		        <if test="goodsPrice != null">
+		        goodsPrice=#{goodsPrice},
+		        </if>
+		          <if test="category != null">
+		       		<if test="category.categoryId != null">
+					category=#{category.categoryId},
+					</if>
+		         </if>
+		         <if test="goodsDesc != null">
+		         goodsDesc=#{goodsDesc},
+		       </if>
+		       <if test="goodsPhoto != null">
+		       goodsPhoto=#{goodsPhoto},
+		       </if>
+		       <if test="material != null">
+		       material=#{material},
+		     </if>
+		     goodsModifyDate=#{goodsModifyDate}, 
+		  </set>
+		     <where>
+		     gid=#{gid}
+		     </where>
+	</update>
+	<!-- 根据 gid 修改商品库存信息 -->
+	<update id="updategoodsStockById" parameterType="goods">
+		update ring_goods set goodsStock=#{goodsStock} where gid=#{gid}
+	</update>
+	<!-- 下架处理，修改status的值 -->
+	<update id="updategoodsStatusById">
+		update ring_goods set status=0,goodsDownDate=#{goodsDownDate} where gid=#{gid}
+	</update>
+	<!-- 前端显示最新商品 前五 -->
+	<select id="showNewgoods" parameterType="goods" resultMap="goodsMap">
+	 	select ring_goods.*,ring_category.* from ring_goods,ring_category 
+			where ring_goods.category=ring_category.categoryId 
+			and status=1 order by goodsCreateDate limit 5;
+	</select>
+	<!-- 根据uid显示其收藏的商品列表 -->
+	<select id="findAllStoregoods" resultMap="goodsMap" parameterType="goods">
+		  select * from ring_goods ,ring_goodsstore where ring_goods.gid =ring_goodsstore .gid 
+		and ring_goods.gid in(select gid from ring_goodsstore)
+		and ring_goodsstore.uid=#{uid}
+	</select>
+	<!-- 搜索商品 -->
+	<select id="searchGoods" resultMap="goodsMap">
+   	select ring_goods.*,ring_category.* from ring_goods,ring_category 
+   	where ring_goods.category=ring_category.categoryId 
+   	and status=1 and (goodsName like concat('%',#{goodsName},'%') OR goodsDesc like concat('%',#{goodsDesc},'%')) 
+   	 <if test="category != null">
+		         and ring_goods.category=#{category}
+	</if>
+  </select>
+  <!-- 获取热门商品，根据收藏的次数>2为热门商品 -->
+  <select id="findHotGoods" resultMap="goodsMap">
+  	select ring_goods.*,ring_goodsstore.* from ring_goods,ring_goodsstore where ring_goods.gid=ring_goodsstore.gid 
+  	and (select count(gid) from ring_goodsstore) >2
+  </select>
+  <!-- 判断商品有没有被收藏 -->
+	<select id="findgoodsStoreById" resultType="goodsstore">
+			select * from ring_goodsstore where uid=#{uid} and gid=#{gid}
+	</select>
+</mapper>
+
+
+

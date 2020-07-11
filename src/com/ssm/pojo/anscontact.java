@@ -6,7 +6,6 @@ public class anscontact {
 	private Integer ansContactId;
 	private String ansMessage;
 	private Date ansDate;
-	private String status;
 	private User user;
 	private Integer uid;
 	private Contact contact;
@@ -14,14 +13,13 @@ public class anscontact {
 	public anscontact() {
 		super();
 	}
-	public anscontact(Integer ansContactId, Integer uid, String ansMessage, Date ansDate, String status,Integer contactId,
+	public anscontact(Integer ansContactId, Integer uid, String ansMessage, Date ansDate,Integer contactId,
 					   User user,Contact contact) {
 		super();
 		this.ansContactId = ansContactId;
 		this.uid = uid;
 		this.ansMessage = ansMessage;
 		this.ansDate = ansDate;
-		this.status = status;
 		this.contactId = contactId;
 		this.user = user;
 		this.contact = contact;
@@ -49,12 +47,6 @@ public class anscontact {
 	}
 	public void setAnsDate(Date ansDate) {
 		this.ansDate = ansDate;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public Integer getContactId() {
 		return contactId;

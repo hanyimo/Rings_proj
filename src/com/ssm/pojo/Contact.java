@@ -4,19 +4,34 @@ import java.util.Date;
 
 public class Contact {
 	private Integer contactId;
+	private Integer uid;
 	private User user;
 	private String cMessage;
 	private Date cDate;
+	private Integer status;
 	public Contact() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Contact(Integer contactId, User user, String cMessage, Date dDate) {
+	public Contact(Integer contactId, Integer uid, String cMessage, Date cDate, Integer status) {
 		super();
 		this.contactId = contactId;
-		this.user = user;
+		this.uid = uid;
 		this.cMessage = cMessage;
 		this.cDate = cDate;
+		this.status = status;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 	public Integer getContactId() {
 		return contactId;

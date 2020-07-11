@@ -71,6 +71,8 @@
 								</fieldset>
 								<div class="form-actions center">
 									<input type="submit" class="btn btn-sm btn-success" value="提交"/>					
+									<a href="#" onclick="window.history.back()">
+									<input type="button" class="btn btn-sm btn-success"  value="返回" ></a>
 								</div>
 							</form:form>
 						</div>

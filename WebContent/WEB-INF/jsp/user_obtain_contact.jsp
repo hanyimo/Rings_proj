@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		<title>首页</title>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.CategoryMapper">
+<!-- 根据 category 查找对应的 分类 -->
+	<select id="findCategory" parameterType="string" resultType="Category">
+		select * from ring_category where category=#{category}
+	</select>
+	<!-- 添加商品分类到数据库中 -->
+	<insert id="addNewgoodsCate" parameterType="string">
+		insert into ring_category(category) values(#{category})
+	</insert>
+	<!-- 查找所有分类 -->
+	<select id="findAllCategories" resultType="Category">
+		select * from ring_category
+	</select>
+	<!-- 根据 categoryId 获取分类信息 -->
+	<select id="findCategoryById" resultType="Category">
+		select * from ring_category where categoryId=#{categoryId}
+	</select>
+	<!-- 根据 id 修改分类名称 -->
+	<update id="updateCategoryById" parameterType="Category">
+		update ring_category set category=#{category} where categoryId=#{categoryId}
+	</update>
+	<!-- 根据 id 删除分类 -->
+	<delete id="delCategoryById" parameterType="int">
+		delete from ring_category where categoryId=#{categoryId}
+	</delete>
+</mapper>
+
+
+

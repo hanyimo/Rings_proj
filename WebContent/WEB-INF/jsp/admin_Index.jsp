@@ -27,10 +27,7 @@
 
 		
 		<script src="${pageContext.request.contextPath }/statics/server/js/ace-extra.min.js"></script>
-		<style type="text/css">
-			a{ text-decoration:none;color:white;} 
-			a:hover{ text-decoration:none;}
-		</style>
+
 	
 	</head>
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,27 +45,40 @@
             <div class="container">
                 <h4 class="fleft">分类产品</h4>
                 <ul class="breadcrumb fright">
-                    <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/">首页</a></li>
                     <li class="active">分类产品</li>
                 </ul>
             </div>
         </div>
     </section>
-    <!-- 循环获取产品 -->
-    <section class="row contentRowPad greybg">
+     <section class="row contentRowPad greybg">
         <div class="container">
             <div class="row">
+               <!-- 循环获取产品 -->
+               <c:forEach items="${requestScope.gs}" var="gs">
                 <div class="col-sm-3 product">
                     <div class="productInner row m0">
                         <div class="row m0 imgHov">
-                            <img src="${pageContext.request.contextPath }/statics/client/images/product/pro1p/1.png" alt="">
+                          <img src="${pageContext.request.contextPath }/statics/file/${gs.goodsPhoto}" 
+                          alt="" style="wdith:300px;height:280px;"> 
+                          
                             <div class="row m0 hovArea">
                                 <div class="row m0 icons">
-                                    <ul class="list-inline">
-                                        <li><a href="#"><i class="fas fa-heart"></i></a></li>
-                                    </ul>                                    
+                           	 	<!-- 用户收藏商品 -->
+	                            <!-- 没登录跳到login -->
+	                           	  <c:if test="${empty loginer}">
+	                              <ul class="list-inline">
+	                              	<li><a href="${pageContext.request.contextPath }/user/login"><i class="fas fa-heart"></i></a></li>
+	                              </ul>
+	                              </c:if>
+	                           	  <c:if test="${!empty loginer}">
+	                              <ul class="list-inline">
+                                      <li><a href="${pageContext.request.contextPath }/add_new_goods_store/${gs.gid}/${gs.category.categoryId}"><i class="fas fa-heart"></i></a></li>
+                                  </ul>
+	                              </c:if>
+	                                                                        
                                 </div>
-                                <div class="row m0 proType"><a href="#">Baccarat</a></div>
+                                <div class="row m0 proType">${gs.goodsName }</div>
                                 <div class="row m0 proRating">
                                     <i class="fas fa-star-o"></i>
                                     <i class="fas fa-star-o"></i>
@@ -72,21 +86,54 @@
                                     <i class="fas fa-star-o"></i>
                                     <i class="fas fa-star-o"></i>
                                 </div>
-                                <div class="row m0 proPrice"><i class="fas fa-usd"></i>455.00</div>
+                                <div class="row m0 proPrice"><i class="fas fa-usd"></i>￥${gs.goodsPrice}</div>
                             </div>
                         </div>
-                        <div class="row m0 proName"><a href="singleproduct.jsp">Maximus quam posuere</a></div>
-                        <div class="row m0 proBuyBtn">
-                            <button class="addToCart btn">add to cart</button>
+                        <div class="row m0 proName"><a href="${pageContext.request.contextPath }/singleproduct/${gs.gid}">${gs.goodsName}</a></div>
+                        <!-- 没登录，跳到登录 -->
+	                     <c:if test="${empty loginer}">
+	                     <div class="row m0 proBuyBtn">
+                            <a href="${pageContext.request.contextPath }/user/login"><button class="addToCart btn">添加购物车</button></a>
                         </div>
+	                     </c:if>
+	                     <!-- 登录状态（加入购物车） -->
+	                     <c:if test="${!empty loginer}">
+	                     <div class="row m0 proBuyBtn">
+                            <a href="${pageContext.request.contextPath }/client/add_cart3/${gs.gid}/${gs.category.categoryId}"><button class="addToCart btn">添加购物车</button></a>
+                        </div>
+	                     </c:if>
                     </div>
                 </div>
+                <input type="hidden" name="cate" value="${gs.category.categoryId}" id="search"> 
+             </c:forEach>
              </div>   
         </div>
     </section>
     
       <!-- 尾部 -->
       <%@ include file="client/footer.jsp" %>
+    <!--jQuery-->
+    <script src="${pageContext.request.contextPath }/statics/client/js/jquery-2.1.3.min.js"></script>
+
+    <!--Google Maps-->
+    <script src="http://ditu.google.cn/maps/api/js"></script>
+    
+    <!--Bootstrap JS-->
+    <script src="${pageContext.request.contextPath }/statics/client/js/bootstrap.min.js"></script>
+    
+     
+         
+    <!--Owl Carousel-->
+    <script src="${pageContext.request.contextPath }/statics/client/vendors/owl.carousel/js/owl.carousel.min.js"></script>
+    
+    <!--Isotope-->
+    <script src="${pageContext.request.contextPath }/statics/client/vendors/isotope/isotope-custom.js"></script>
+    
+    <!--FlexSlider-->
+    <script src="${pageContext.request.contextPath }/statics/client/vendors/flexslider/jquery.flexslider-min.js"></script>
+    
+    <!--D-shine JS-->
+    <script src="${pageContext.request.contextPath }/statics/client/js/d-shine.js"></script>
 </body>
 </html>
     

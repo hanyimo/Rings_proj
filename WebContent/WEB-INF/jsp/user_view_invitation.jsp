@@ -33,8 +33,8 @@
    	var error = '<%=(String)request.getAttribute("error") %>';//输出error给js变量error
   	//页面加载完后执行
    	window.onload=function(){
-		var a = "内容都不能为空";
-		var b = "发帖成功";
+		var a = "内容不能为空";
+		var b = "评论成功";
 		if(error==a){
 			alert(error);
 		}else if(error==b){
@@ -65,8 +65,7 @@
                     <div class="blog row m0 single_post">
                         <div class="media-left authorImg">
                             <a href="#">
-<!-- ***********************************动态获取头像(修改头像上传路径)*********************************** -->
-                                <img src="${pageContext.request.contextPath }/statics/client/invitationupload/${invitation.uid.userPhoto}"  width="60px" height="60px"/>
+                               <img src="${pageContext.request.contextPath }/statics/client/userupload/${invitation.uid.userPhoto}"  width="70px" height="65px"/>
                             </a>
                         </div>
                         <div class="media-body" style="width:800px;">
@@ -74,10 +73,10 @@
                             	<h4>${invitation.uid.userAlice}</h4>
                             	<h5><fmt:formatDate value="${invitation.invCreatDate}" pattern="yyyy-MM-dd"/></h5>
                             </div>
-<!-- ***********************************权限判断（帖主）*********************************** -->
-							<%-- <c:if test="${invitation.uid.userName==loger.userName }"> --%>
+							<!-- 权限判断（帖主） -->
+							<c:if test="${invitation.uid.userName==loginer.userName }">
                             	<a class="com_btn" href="${pageContext.request.contextPath }/design/delinvitation/${invitation.invid}" target="_blank" style="margin-top:15px;float:right;width:80px;text-align:center;">删除</a>
-                        	<%-- </c:if> --%>
+                        	</c:if>
                         </div>
                         <div class="row m0 featureImg">
                             <h2 style="text-align:center;">${invitation.invTitle}</h2>
@@ -86,32 +85,42 @@
                             <p>${invitation.invMessage}</p>
                         </div>
                     </div> <!--帖子内容end-->
+                    <!-- 登录发帖 -->
+                    <c:if test="${!empty loginer}">
                     <div class="shareRow row m0">
                     	<a href="#replyForm" class="com_btn" style="margin:0px 0px 0px 42%;">发表评论</a>
                     </div>
+                    </c:if>
+                    <!-- 未登录，跳到登录页面 -->
+                    <c:if test="${empty loginer}">
+                    <div class="shareRow row m0">
+                    	<a href="${pageContext.request.contextPath }/user/login" class="com_btn" style="margin:0px 0px 0px 42%;">发表评论</a>
+                    </div>
+                    </c:if>
                     <div class="row m0 comments">
                        <c:forEach items="${ans }" var="ans">
                        <div class="media commentBox">
                             <div class="media-left">
                                 <a href="#">
-                                    <img src="${pageContext.request.contextPath }/statics/client/invitationupload/${ans.user.userPhoto}" alt="">
+                                    <img src="${pageContext.request.contextPath }/statics/client/userupload/${ans.user.userPhoto}" />
                                 </a>
                             </div>
                             <div class="media-body">
                                 <h5 class="heading">${ans.user.userAlice }</h5>
-<!-- ***********************************权限判断(评论的人和帖主)*********************************** --> 
-                               <%--  <c:if test="${ans.user.userName==loger.userName || ans.user.userName==invitation.uid.userName}"> --%>
+								<!-- 权限判断(评论的人和帖主可以删贴) --> 
+                               <c:if test="${ans.user.userName==loginer.userName || loginer.userName==invitation.uid.userName}">
                                		<h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/> | <a href="${pageContext.request.contextPath }/design/delinvitationAns/${invitation.invid}/${ans.aid}">删除</a></h6>
-                               <%--  </c:if> --%>
-                                <%-- <c:if test="${ans.user.userName!=loger.userName && ans.user.userName!=invitation.uid.userName}">
+                               </c:if>
+                                <c:if test="${ans.user.userName!=loginer.userName && loginer.userName!=invitation.uid.userName}">
                                 	<h6><fmt:formatDate value="${ans.ansDate }" pattern="yyyy-MM-dd"/></h6>
-                                </c:if> --%>
+                                </c:if>
                                 <p>${ans.ansMessage }</p>
                             </div>
                         </div>
                         </c:forEach>
                     </div> <!--评论end-->
-                    
+                    <!-- 登录才能评论 -->
+                    <c:if test="${!empty loginer}">
                     <div class="row m0" id="replyForm" style="padding:30px 0px 0px 0px;">
                         <h4 class="heading">发表评论</h4>
                         <form class="form" method="post" action="${pageContext.request.contextPath }/design/view_invitation">
@@ -128,6 +137,7 @@
 							<input type="hidden" name="ansMessage" id="ansMessage"/>
 						</form>
                     </div><!-- 发表评论end -->
+                    </c:if>
                 </div>
             </div>
         </div>

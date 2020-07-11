@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@
             <div class="container">
                 <h4 class="fleft">产品详情</h4>
                 <ul class="breadcrumb fright">
-                    <li><a href="${pageContext.request.contextPath }/index">首页</a></li>
+                    <li><a href="${pageContext.request.contextPath }/">首页</a></li>
                     <li class="active">产品详情</li>
                 </ul>
             </div>
@@ -44,48 +45,42 @@
     <section class="row contentRowPad">
         <div class="container">
             <div class="row singleProduct">
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <div class="row m0 flexslider" id="productImageSlider">
-                        <ul class="slides">
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/1.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/2.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/3.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/4.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/5.jpg" alt=""></a></li>
-                            <li><a href="#"><img src="${pageContext.request.contextPath }/statics/client/images/product/single/6.jpg" alt=""></a></li>
+                    <!-- 上方显示商品大图 -->
+                        <ul >
+                            <li><img src="${pageContext.request.contextPath }/statics/file/${gs.goodsPhoto}" alt="" ></li>
                         </ul>
                     </div>
-                    <div class="row m0 flexslider" id="productImageSliderNav">
+                
+                    <div class="row m0 flexslider" id="productImageSliderNav" >
                         <ul class="slides">
-                            <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/1s.jpg" alt=""></li>
-                            <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/2s.jpg" alt=""></li>
-                            <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/3s.jpg" alt=""></li>
-                              <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/4s.jpg" alt=""></li>
-                            <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/5s.jpg" alt=""></li>
-                            <li><img class="img-thumbnail" src="${pageContext.request.contextPath }/statics/client/images/product/single/6s.jpg" alt=""></li>
+                             <!-- 循环获取相似产品推荐，点击图片跳转到各自详情页 -->
+                              <c:forEach items="${gss}" var="gss">
+                                 <li onclick="window.location.href='${pageContext.request.contextPath}/singleproduct/${gss.gid }'"><a href="#" >
+                                 <img src="${pageContext.request.contextPath }/statics/file/${gss.goodsPhoto}" alt="" ></a></li>
+                        </c:forEach>  
                         </ul>
                     </div>
-                </div>
+               
+             </div>
                 <div class="col-sm-5">
-                    <div class="row m0">
-                        <h4 class="heading">Precious Jewels Ring</h4>
-                        <h3 class="heading price"><del>$580</del>$420</h3>
+                    <div class="row m0" style="margin-left:160px;">
+                        <h4 class="heading">${gs.goodsName }</h4>
+                        <h3 class="heading price"><del>￥580000</del>￥${gs.goodsPrice }</h3>
                         
                         <div class="row descList m0">
                             <dl class="dl-horizontal">
                                 <dt>制造商：</dt>
                                 <dd>Rings</dd>
                                  <dt>材质：</dt>
-                                <dd>？</dd>
-                                <dt>可用性:</dt>
-                                <dd>？</dd>
+                                <dd>${gs.material }</dd>
                                 <dt>产品代码 :</dt>
-                                <dd>？</dd>
+                                <dd>${gs.goodsCode }</dd>
                             </dl>
                         </div>
                         <div class="row m0 shortDesc">
-                            <p class="m0">Rustic, natural, often made of bark-covered logs or simple planks. Look for junk shop finds when in the country (for authenticity), or purchase hand-made new versions.<br>
-                            Rustic, natural, often made of bark-covered logs or simple planks. Look for junk shop finds when in the country (for authenticity), or purchase hand-made new versions. when in the country (for authenticity), or purchase hand-made </p>
+                            <p class="m0">${gs.goodsDesc }</p>
                         </div>
                         <div class="row m0">
                             <h5 class="heading proAttr">尺寸:</h5>
@@ -96,11 +91,30 @@
                                 <option value="white">7.6 mm</option>
                             </select>
                         </div>
+                        <!-- 没登录，跳到登录 -->
+	                    <c:if test="${empty loginer}">
                         <div class="row m0">
                             <ul class="list-inline wce">
-                                <li><a href="#"><i class="far fa-heart"></i>Add to Wishlist</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user/login"><i class="far fa-heart"></i>添加收藏</a></li>
                             </ul>
                         </div>
+                        </c:if>
+                        <!-- 登录，判断用户是否收藏，收藏了显示已收藏；点击添加收藏变为已收藏 -->
+	                    <c:if test="${!empty loginer}">
+                        <div class="row m0">
+                            <ul class="list-inline wce">
+                            	<!-- 已经收藏 -->
+                            	<c:if test="${!empty re}">
+                                <li><a href="#"><i class="far fa-heart"></i>已收藏</a></li>
+                            	</c:if>
+                            	<!-- 没有收藏 -->
+                            	<c:if test="${empty re}">
+                                <li><a href="${pageContext.request.contextPath}/add_new_goodss_store/${gs.gid}"><i class="far fa-heart"></i>添加收藏</a></li>
+                            	</c:if>
+                            </ul>
+                        </div>
+                        </c:if>
+                        
                         <div class="row m0 qtyAtc">
                             <div class="fleft quantity">
                                 <div class="fleft">购买数量 <span>=</span></div>
@@ -112,7 +126,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="fleft btn btn-default"><img src="${pageContext.request.contextPath }/statics/client/images/icons/cart3.png" alt=""> add to cart</button>
+                            <!-- 已登录 -->
+                            <c:if test="${!empty loginer}">
+                            <a href="${pageContext.request.contextPath }/client/add_cart2/${gs.gid}"><button class="fleft btn btn-default"><img src="${pageContext.request.contextPath }/statics/client/images/icons/cart3.png" alt=""> 添加购物车</button></a>
+                        	</c:if>
+                        	<!-- 未登录 -->
+                            <c:if test="${empty loginer}">
+                            <a href="${pageContext.request.contextPath }/user/login"><button class="fleft btn btn-default"><img src="${pageContext.request.contextPath }/statics/client/images/icons/cart3.png" alt=""> 添加购物车</button></a>
+                        	</c:if>
                         </div>
                     </div>
                 </div>
@@ -131,10 +152,10 @@
                 </ul>
                 <div class="tab-content shortcodeTabContent">
                     <div role="tabpanel" class="tab-pane row m0 active" id="description">
-                        <div class="fleft img"><img class="img-responsive" src="${pageContext.request.contextPath }/statics/client/images/product/10.png" alt=""></div>
+                        <div class="fleft img"><img class="img-responsive" src="${pageContext.request.contextPath }/statics/file/${gs.goodsPhoto}" alt=""></div>
                         <div class="fleft desc">
                             <h5 class="heading">产品详情介绍</h5>
-                            <p>哈哈哈</p>
+                            <p>${gs.goodsDesc }</p>
                         </div>
                     </div>
      			<div role="tabpanel" class="tab-pane row m0" id="review">

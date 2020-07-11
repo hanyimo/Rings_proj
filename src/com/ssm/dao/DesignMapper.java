@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ssm.pojo.Design;
 import com.ssm.pojo.Invitation;
 import com.ssm.pojo.InvitationAns;
+import com.ssm.pojo.User;
 
 public interface DesignMapper {
 	//根据uid查找对应的设计
@@ -24,6 +25,8 @@ public interface DesignMapper {
 	Invitation findInvitationByTitle(String invTitle);
 	//根据invid删除自己的invitation信息
 	int delInvitationById(Integer invid);
+	//根据invid删除自己的invitationAns信息
+	int delInvitationAnsByInvId(Integer invid);
 	//根据aid删除invitationAns信息
 	int delInvitationAnsById(Integer invid);
 	//添加回复信息
@@ -34,4 +37,5 @@ public interface DesignMapper {
 	int updateInvitationSuccess(@Param("invid") Integer invid,@Param("invAuditDate") Date invAuditDate);
 	//审核未通过
 	int updateInvitationNo(@Param("invid") Integer invid,@Param("invAuditDate") Date invAuditDate);
+	
 }

@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,6 +56,7 @@
 			alert(error);
 		}error=null;
 	}
+   	<%session.removeAttribute("error"); %>
    </script>
 	<!-- 头部 -->
       <%@ include file="client/header.jsp" %>
@@ -72,7 +76,7 @@
       <section id="ourTeam" class="row contentRowPad">
          <div class="container">
          	<div class="row sectionTitle">
-         		<a class="com_btn" href="${pageContext.request.contextPath}/design//design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
+         		<a class="com_btn" href="${pageContext.request.contextPath}/design/design" style="float:right;margin:0px 0px 0px 20px;">我的设计</a>
          		<a class="com_btn" href="https://www.vam.ac.uk/designaring" target="_blank" style="float:right;">开始设计</a>
          	</div>
             <div class="row sectionTitle" style="border-bottom:3px solid #e1e1e1;border-top:3px solid #e1e1e1">

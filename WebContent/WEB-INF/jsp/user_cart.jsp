@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html lang="en">
    <head>
+    <c:if test="${empty loginer}">
+		<c:redirect url="/user/login"/>
+	</c:if>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Home</title>
+      <title>购物车</title>
       <!--Favicons-->
       <link rel="icon" type="image/png" sizes="32x32" href="${pageContext.request.contextPath }/statics/client/favicon/favicon-32x32.png">
       <meta name="msapplication-TileColor" content="#ffffff">
@@ -23,6 +28,14 @@
       <!--Mechanic Styles-->
       <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/client/css/style.css">
       <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/client/css/responsive.css">
+     <!--  <script type="text/javascript">
+	 	 function checkDel() {
+			return window.confirm("您确定要删除吗?");
+		}
+	 	 function checkClear() {
+			return window.confirm("确定要清空购物车吗?");
+		}
+    </script> -->
    </head>
    <body>
     <!-- 引入头部 -->
@@ -47,51 +60,41 @@
                   <table class="table">
                      <thead>
                         <tr>
-                           <th class="productImage">商品图片</th>
+                        
+                           <!-- <th class="productImage">商品图片</th> -->
                            <th class="productName">商品名称</th>
-                           <th>商品价格</th>
-                           <th>购买数量</th>
-                           <th>总价</th>
-                           <th>移除</th>
+                           <th>商品价格:</th>
+                           <th>购买数量:</th>
+                           <th>总价:</th>
+                           <th>移除:</th>
+                        
                         </tr>
                      </thead>
-                     <tbody>
+                     <tbody  id="qingk">
+                       <c:set var="sum" value="0"/>
+    				    <c:forEach items="${goods }" var="good">
+    				   <c:set var="sum" value="${sum=sum+good.count*good.goods.goodsPrice }"/> 
                         <tr class="alert" role="alert">
-                           <td class="productImage"><img src="${pageContext.request.contextPath }/statics/images/product/single/l1.png" alt=""></td>
-                           <td class="productName">
-                              <h6 class="heading">dining table</h6>
-                              <div class="row descList m0">
-                                 <dl class="dl-horizontal">
-                                    <dt>制造商 :</dt>
-                                    <dd>Rings</dd>
-                                    <dt>产品编号 :</dt>
-                                    <dd>Xuo15</dd>
-                                    <dt>颜色 :</dt>
-                                    <dd>黑色</dd>
-                                    <dt>大小 :</dt>
-                                    <dd>7.5 mm</dd>
-                                 </dl>
-                              </div>
+                          <td class="productName">
+                              <h6 class="heading">${good.goods.goodsName}</h6>
                            </td>
-                           <td class="price"><del>$580</del>$420</td>
+                           <td class="price">${good.goods.goodsPrice }</td>
                            <td>
-                              <div class="input-group spinner">
-                                 <input type="text" class="form-control" value="2">
-                                 <div class="input-group-btn-vertical">
-                                    <button class="btn btn-default"><i class="fas fa-angle-up"></i></button>
-                                    <button class="btn btn-default"><i class="fas fa-angle-down"></i></button>
-                                 </div>
+                              <div class="input-group spinner" style="border:0px solid green">
+                                 <input type="text" class="form-control" value=" ${good.count}">
                               </div>
                            </td>
-                           <td class="price">$840</td>
-                           <td><a href="#" class="edit" data-dismiss="alert" aria-label="Close"><i class="far fa-trash-alt"></i></a></td>
+                           <!-- 总价 gid="${ good.goods.gid}"； 动态获取商品id：?gid=${good.goods.gid},,,,href="${pageContext.request.contextPath }/client/delete_goods"-->
+                           <td class="price"><c:out value="${sum}"/></td>
+                           <td><a cid="${good.cid}" href="#"  class="edit" data-dismiss="alert" aria-label="Close" ><i class="far fa-trash-alt"></i></a></td>
                         </tr>
+                      </c:forEach>
                      </tbody>
                      <tfoot>
                         <tr>
                            <td colspan="7">
-                              <a href="#" class="btn btn-primary btn-lg">继续购物</a>
-                              <a href="#" class="btn btn-default btn-lg fright">清空购物车</a>
+                              <a href="${pageContext.request.contextPath }/" class="btn btn-primary btn-lg">继续购物</a>
+                              <a uid="${uid}"  href="#"  class="btn btn-default btn-lg fright">清空购物车</a>
                            </td>
                         </tr>
                      </tfoot>
@@ -141,16 +144,9 @@
                   </div>
                   <div class="col-sm-4">
                      <div class="row m0 totalCheckout">
-                        <div class="descList row m0">
-                           <dl class="dl-horizontal">
-                              <dt>Subtotal</dt>
-                              <dd>$1260</dd>
-                              <dt class="gt">Grand Total</dt>
-                              <dd>$1260</dd>
-                           </dl>
-                        </div>
-                        <a href="${pageContext.request.contextPath }/checkout" class="btn btn-default btn-sm">Proceed to Checkout</a>
-                        <a href="#" class="link">Checkout with multiple addresses</a>
+                        
+                        <a href="${pageContext.request.contextPath }/client/order_goods" class="btn btn-default btn-sm">结算</a>
+                       
                      </div>
                   </div>
                </div>
@@ -159,6 +155,47 @@
       </section>
         <!-- 引入尾部 -->
   	 <%@ include file="client/footer.jsp" %>
+<script type="text/javascript">
+/* 根据购物车cid删除商品 */
+	 $(function(){
+		$("a[cid]").click(function(event){
+			event.preventDefault();
+			var that = $(this);
+			var cidV = $(this).attr('cid');
+			$.ajax({
+				  type: "POST",
+				  url: "${pageContext.request.contextPath}/client/delete_goods",
+				  data: {cid:cidV},
+				  success:function(){
+					  that.parents("tr").remove();
+				  },
+				  error:function(XMLHttpRequest, textStatus, errorThrown){
+				  }
+			});
+		});
+	}); 
+	 /* 根据购物车uid删除商品 */
+	 $(function(){
+		$("a[uid]").click(function(event){
+			event.preventDefault();
+			var that = $(this);
+			var uidV = $(this).attr('uid');
+			$.ajax({
+				  type: "POST",
+				  url: "${pageContext.request.contextPath}/client/delete_orders",
+				  dateTypez:"json",
+				  data: {uid:uidV},
+				  success:function(){
+					  that.parents("tr").remove();
+					  //成功后页面刷新
+					  window.location.reload();
+				  },
+				  error:function(XMLHttpRequest, textStatus, errorThrown){
+				  }
+			});
+		});
+	}); 
+</script>
    </body>
 </html>
 
