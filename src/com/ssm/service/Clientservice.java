@@ -19,6 +19,8 @@ public interface Clientservice {
 	
 	List<Invitation> findAllInvitation();
 	
+	List<Invitation> findAllStInvitation();
+	
 	Invitation findInvitationById(Integer invid);
 	
 	Invitation findInvitationByTitle(String invTitle);

@@ -40,6 +40,10 @@ public class ClientserviceImpl implements Clientservice {
 		return designMapper.findAllInvitation();
 	}
 	@Override
+	public List<Invitation> findAllStInvitation() {
+		return designMapper.findAllStInvitation();
+	}
+	@Override
 	public Invitation findInvitationByTitle(String invTitle) {
 		return designMapper.findInvitationByTitle(invTitle);
 	}

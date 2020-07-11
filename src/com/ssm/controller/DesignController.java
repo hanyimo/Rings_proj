@@ -75,7 +75,7 @@ public class DesignController {
 	@RequestMapping(value="/invitation",method=RequestMethod.GET)
 	public String clientInvitation(Model model) {
 		//获取所有帖子
-		List<Invitation> invitation = clientService.findAllInvitation();
+		List<Invitation> invitation = clientService.findAllStInvitation();
 		model.addAttribute("invitation", invitation);
 		// 循环获取商品分类
 		List<Category> categories = serverService.findAllCategories();

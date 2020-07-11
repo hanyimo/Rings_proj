@@ -28,6 +28,10 @@
 	</insert>
 	<!-- 查找所有的invitation -->
 	<select id="findAllInvitation" resultMap="invitationMap">
+		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid
+	</select>
+	<!-- 查找审核过了的invitation -->
+	<select id="findAllStInvitation" resultMap="invitationMap">
 		select * from ring_invitation left join ring_user on ring_invitation.uid=ring_user.uid where status=1
 	</select>
 	<!-- 根据invid查找invitation -->

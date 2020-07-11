@@ -19,6 +19,8 @@ public interface DesignMapper {
 	int addNewInvitation(Invitation invitation);
 	//查找所有帖子
 	List<Invitation> findAllInvitation();
+	//查找所有审核过的帖子
+	List<Invitation> findAllStInvitation();
 	//根据invid查找invitation
 	Invitation findInvitationById(Integer invid);
 	//根据invTitle查找invitation
